@@ -26,9 +26,9 @@ CodeSniffer
 -----------
 * PHP_CodeSniffer docs: https://github.com/squizlabs/PHP_CodeSniffer
 * Slevomat Coding Standard docs: https://github.com/slevomat/coding-standard/
-* run code sniffer
+* run PHP_CodeSniffer
 ```bash
-./vendor/bin/phpcs --standard=./ruleset.xml --colors -p src/ tests/
+./vendor/bin/phpcs --standard=./ruleset.xml -p src/ tests/
 ```
 * ruleset.xml for app
 ```xml
@@ -44,12 +44,23 @@ CodeSniffer
         </properties>
     </rule>
 </ruleset>
+```
 
+CodeFixer
+---------
+* PHP_CodeSniffer docs: https://github.com/squizlabs/PHP_CodeSniffer
+* run PHP_CodeSnifferFixer
+```bash
+./vendor/bin/phpcbf --standard=./ruleset.xml -p src/ tests/
 ```
 
 PhpStan
 -------
 * PHPStan docs: https://github.com/phpstan/phpstan
+* run PHPStan
+```bash
+./vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/ tests/
+```
 * phpstan.neon for app
 ```neon
 includes:
