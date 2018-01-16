@@ -1,6 +1,6 @@
 {
   "name": "hanaboso/php-check-utils",
-  "description": "Utils for php development - codesniffer, phpstan, phpunit",
+  "description": "Utils for php development - codesniffer, phpstan",
   "version": "1.0.0",
   "license": "MIT",
   "authors": [
