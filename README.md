@@ -49,7 +49,7 @@ CodeSniffer
 
 PhpStan
 -------
-* phpstan docs
+* phpstan docs: https://github.com/phpstan/phpstan
 * phpstan.neon for app
 ```neon
 includes:
