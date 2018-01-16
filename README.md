@@ -53,7 +53,9 @@ PhpStan
 * phpstan.neon for app
 ```neon
 includes:
-	- vendor/hanboso/php-check-utils/phpstan.neon
-	- vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/extension.neon # doctrine extension
+    - vendor/phpstan/phpstan-phpunit/extension.neon # phpunit extension
+    - vendor/phpstan/phpstan-phpunit/rules.neon # phpunit rules
+    - vendor/hanaboso/php-check-utils/phpstan.neon # hanaboso rules
 ```
 
