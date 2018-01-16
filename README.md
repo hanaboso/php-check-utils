@@ -24,8 +24,8 @@ composer install
 
 CodeSniffer
 -----------
-* code sniffer docs: https://github.com/squizlabs/PHP_CodeSniffer
-* coding standard: https://github.com/slevomat/coding-standard/
+* PHP_CodeSniffer docs: https://github.com/squizlabs/PHP_CodeSniffer
+* Slevomat Coding Standard docs: https://github.com/slevomat/coding-standard/
 * run code sniffer
 ```bash
 ./vendor/bin/phpcs --standard=./ruleset.xml --colors -p src/ tests/
@@ -49,7 +49,7 @@ CodeSniffer
 
 PhpStan
 -------
-* phpstan docs: https://github.com/phpstan/phpstan
+* PHPStan docs: https://github.com/phpstan/phpstan
 * phpstan.neon for app
 ```neon
 includes:
