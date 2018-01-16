@@ -3,23 +3,9 @@ PHP CHECK UTILS
 
 Installation
 -----------
-* add dependency to composer.json
-```json
-{
-  "require": {
-      "hanaboso/php-check-utils": "version"
-  },
-  "repositories": [
-      {
-        "type": "git",
-        "url": "https://github.com/hanaboso/php-check-utils"
-      }
-  ]
-}
-```
-* Install package
+* Download package via composer
 ```bash
-composer install
+composer require --dev hanaboso/php-check-utils
 ```
 
 CodeSniffer
