@@ -24,10 +24,26 @@ composer install
 
 CodeSniffer
 -----------
+* code sniffer docs: https://github.com/squizlabs/PHP_CodeSniffer
+* coding standard: https://github.com/slevomat/coding-standard/
 * run code sniffer
 ```bash
 ./vendor/bin/phpcs --standard=./ruleset.xml --colors -p src/ tests/
 ```
-* code sniffer docs: https://github.com/squizlabs/PHP_CodeSniffer
-* coding standard: https://github.com/slevomat/coding-standard/
+* ruleset.xml for app
+```xml
+<?xml version="1.0"?>
+<ruleset name="HANABOSO CODE STYLE">
+    <rule ref="./vendor/hanaboso/php-check-utils/ruleset.xml"/>
+    <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+        <properties>
+            <property name="rootNamespaces" type="array" value="
+                src=>MyBundle, 
+                tests=>Tests 
+            "/>
+        </properties>
+    </rule>
+</ruleset>
+
+```
 
