@@ -47,3 +47,13 @@ CodeSniffer
 
 ```
 
+PhpStan
+-------
+* phpstan docs
+* phpstan.neon for app
+```neon
+includes:
+	- vendor/hanboso/php-check-utils/phpstan.neon
+	- vendor/phpstan/phpstan-doctrine/extension.neon
+```
+
