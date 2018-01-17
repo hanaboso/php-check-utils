@@ -61,5 +61,5 @@ PhpStorm
 * Import code style XML file from ./vendor/hanaboso/php-check-utils/phpstorm.xml to PhpStorm
 * Open import window
 ```
-File -> Settings -> Code Style -> PHP -> Import Scheme -> Intellij IDEA code style XMl
+File -> Settings -> Code Style -> PHP -> Import Scheme -> Intellij IDEA code style XML
 ```
