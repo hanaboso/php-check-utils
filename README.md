@@ -50,10 +50,17 @@ PhpStan
 * phpstan.neon for app
 ```neon
 includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon # symfony extension
     - vendor/phpstan/phpstan-doctrine/extension.neon # doctrine extension
     - vendor/phpstan/phpstan-phpunit/extension.neon # phpunit extension
     - vendor/phpstan/phpstan-phpunit/rules.neon # phpunit rules
     - vendor/hanaboso/php-check-utils/phpstan.neon # hanaboso rules
+parameters
+    excludes_analyse:
+    ignoreErrors:
+    symfony:
+        container_xml_path: %rootDir%/../../../var/cache/dev/srcDevDebugProjectContainer.xml
+
 ```
 
 PhpStorm
