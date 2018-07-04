@@ -6,3 +6,4 @@ parameters:
 		- '#Call to an undefined method Doctrine\\Common\\Persistence\\ObjectRepository::*.#' # remove after better doctrine support
 		- '#Call to an undefined method Doctrine\\ORM\\EntityRepository::*.#' # remove after better doctrine support
 		- '#Call to an undefined method Doctrine\\ODM\\MongoDB\\DocumentRepository::*.#' # remove after better doctrine support
+		- '#GuzzleHttp\\Exception\\GuzzleException|Hanaboso\\CommonsBundle\\Transport\\Curl\\CurlException is not subtype of Throwable#' # Exceptions without Throwable
