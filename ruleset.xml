@@ -29,6 +29,10 @@
         <exclude name="SlevomatCodingStandard.Operators.DisallowIncrementAndDecrementOperators"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.DisallowShortTernaryOperator"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.DisallowEmpty"/>
+        <!-- Exclude from version 4.7 -->
+        <exclude name="SlevomatCodingStandard.ControlStructures.NewWithoutParentheses"/>
+        <exclude name="SlevomatCodingStandard.Functions.StaticClosure"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
     </rule>
 
     <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
