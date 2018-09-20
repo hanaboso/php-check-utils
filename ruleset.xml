@@ -1,11 +1,5 @@
 <?xml version="1.0"?>
 <ruleset name="HANABOSO">
-    <!-- Slevomat coding standards -->
-    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
-        <properties>
-            <property name="searchAnnotations" type="boolean" value="true"/>
-        </properties>
-    </rule>
 
     <rule ref="./../../slevomat/coding-standard/SlevomatCodingStandard/ruleset.xml">
         <exclude name="SlevomatCodingStandard.ControlStructures.DisallowEqualOperators"/>
@@ -44,15 +38,19 @@
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireTernaryOperator"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator"/>
         <exclude name="SlevomatCodingStandard.Operators.RequireOnlyStandaloneIncrementAndDecrementOperators"/>
-        <exclude name="SlevomatCodingStandard.Arrays.DisallowImplicitArrayCreation"/>
     </rule>
 
+    <!-- Slevomat coding standards -->
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+        <properties>
+            <property name="searchAnnotations" type="boolean" value="true"/>
+        </properties>
+    </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <properties>
             <property name="spacesCountAroundEqualsSign" type="int" value="0"/>
         </properties>
     </rule>
-    <!-- Slevomat coding standards -->
 
     <!-- Squiz coding standards -->
     <rule ref="Squiz.Commenting.FunctionComment">
