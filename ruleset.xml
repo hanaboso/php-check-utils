@@ -38,6 +38,7 @@
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireTernaryOperator"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator"/>
         <exclude name="SlevomatCodingStandard.Operators.RequireOnlyStandaloneIncrementAndDecrementOperators"/>
+        <exclude name="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForContants"/>
     </rule>
 
     <!-- Slevomat coding standards -->
