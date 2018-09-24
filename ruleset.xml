@@ -39,6 +39,8 @@
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator"/>
         <exclude name="SlevomatCodingStandard.Operators.RequireOnlyStandaloneIncrementAndDecrementOperators"/>
         <exclude name="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForContants"/>
+        <!-- Exclude from version 4.8.1 -->
+        <exclude name="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants"/>
     </rule>
 
     <!-- Slevomat coding standards -->
