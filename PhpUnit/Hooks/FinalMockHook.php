@@ -6,11 +6,11 @@ use DG\BypassFinals;
 use PHPUnit\Runner\BeforeTestHook;
 
 /**
- * Class PhpUnitHook
+ * Class FinalMockHook
  *
  * @package Hanaboso\PhpCheckUtils\PhpUnit\Hooks
  */
-final class PhpUnitHook implements BeforeTestHook
+final class FinalMockHook implements BeforeTestHook
 {
 
     /**
