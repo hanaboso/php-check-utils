@@ -80,6 +80,22 @@ trait DatabaseTestTrait
     }
 
     /**
+     *
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        if (isset($this->em)) {
+            $this->em->close();
+        }
+
+        if (isset($this->dm)) {
+            $this->dm->close();
+        }
+    }
+
+    /**
      * --------------------------------------- HELPERS ----------------------------------------------
      */
 
