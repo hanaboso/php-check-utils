@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.1/phpunit.xsd"
-        colors="true"
-        bootstrap="vendor/autoload.php"
-        cacheResult="false"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./../../phpunit/phpunit/phpunit.xsd"
+         colors="true"
+         cacheResult="false"
 >
-
-    <php>
-        <env name="KERNEL_CLASS" value="Path\To\Kernel"/>
-        <env name="APP_ENV" value="test"/>
-        <env name="APP_DEBUG" value="1"/>
-    </php>
-
     <extensions>
         <extension class="Hanaboso\PhpCheckUtils\PhpUnit\Hooks\FinalMockHook"/>
     </extensions>
-
-    <filter>
-        <whitelist>
-            <directory>./src</directory>
-            <exclude/>
-        </whitelist>
-    </filter>
 </phpunit>

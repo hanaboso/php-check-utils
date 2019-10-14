@@ -1,3 +1,5 @@
 # Exclude IDE setting
 .idea
 .vscode
+.env
+vendor
