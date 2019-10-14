@@ -15,6 +15,8 @@ use LogicException;
 trait DatabaseTestTrait
 {
 
+    use PrivateTrait;
+
     /**
      * @var DocumentManager
      */
@@ -31,6 +33,10 @@ trait DatabaseTestTrait
     protected function clearMysql(): void
     {
         $connection = $this->em->getConnection();
+        $parameters = $this->getProperty($connection, 'params');
+        $this->setProperty($connection, 'params', array_merge($parameters, ['dbname' => $this->getDatabaseName()]));
+        $this->setProperty($this->em, 'conn', $connection);
+
         $connection->exec('SET FOREIGN_KEY_CHECKS = 0;');
         $tables = array_column($connection->fetchAll(sprintf(
             "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%s' AND (AUTO_INCREMENT > 1 OR TABLE_ROWS > 0)",
@@ -94,6 +100,14 @@ trait DatabaseTestTrait
         } else {
             throw new LogicException('Database is not set');
         }
+    }
+
+    /**
+     * @return string
+     */
+    private function getDatabaseName(): string
+    {
+        return sprintf('%s%s', $this->em->getConnection()->getDatabase(), getenv('TEST_TOKEN'));
     }
 
 }
