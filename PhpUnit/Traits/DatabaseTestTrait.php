@@ -34,7 +34,7 @@ trait DatabaseTestTrait
     {
         $connection = $this->em->getConnection();
         $parameters = $this->getProperty($connection, 'params');
-        $this->setProperty($connection, 'params', array_merge($parameters, ['dbname' => $this->getDatabaseName()]));
+        $this->setProperty($connection, 'params', array_merge($parameters, ['dbname' => $this->getEmDatabaseName()]));
         $this->setProperty($this->em, 'conn', $connection);
 
         $connection->exec('SET FOREIGN_KEY_CHECKS = 0;');
@@ -55,28 +55,31 @@ trait DatabaseTestTrait
      */
     protected function clearMongo(): void
     {
+        $this->dm->getConfiguration()->setDefaultDB($this->getDmDatabaseName());
         $this->dm->getConnection()->dropDatabase($this->dm->getConfiguration()->getDefaultDB());
         $this->dm->getSchemaManager()->createCollections();
     }
 
     /**
      * @param object $entity
+     * @param bool   $flush
      *
      * @throws Exception
      */
-    protected function pfe(object $entity): void
+    protected function pfe(object $entity, bool $flush = TRUE): void
     {
-        $this->pf($entity, TRUE);
+        $this->pf($entity, TRUE, $flush);
     }
 
     /**
      * @param object $document
+     * @param bool   $flush
      *
      * @throws Exception
      */
-    protected function pfd(object $document): void
+    protected function pfd(object $document, bool $flush = TRUE): void
     {
-        $this->pf($document, FALSE);
+        $this->pf($document, FALSE, $flush);
     }
 
     /**
@@ -102,28 +105,41 @@ trait DatabaseTestTrait
     /**
      * @param object $object
      * @param bool   $mysql
+     * @param bool   $flush
      *
      * @throws Exception
      */
-    private function pf(object $object, bool $mysql = FALSE): void
+    private function pf(object $object, bool $mysql = FALSE, bool $flush = TRUE): void
     {
         if ($mysql && isset($this->em)) {
-            $this->em->persist($object);
-            $this->em->flush($object);
-        } elseif (isset($this->dm)) {
-            $this->dm->persist($object);
-            $this->dm->flush($object);
+            $db = $this->em;
+        } elseif (!$mysql && isset($this->dm)) {
+            $db = $this->dm;
         } else {
             throw new LogicException('Database is not set');
         }
+
+        $db->persist($object);
+        if ($flush) {
+            $db->flush($object);
+        }
+        unset($db);
     }
 
     /**
      * @return string
      */
-    private function getDatabaseName(): string
+    private function getEmDatabaseName(): string
     {
         return sprintf('%s%s', $this->em->getConnection()->getDatabase(), getenv('TEST_TOKEN'));
+    }
+
+    /**
+     * @return string
+     */
+    private function getDmDatabaseName(): string
+    {
+        return sprintf('%s%s', $this->dm->getConfiguration()->getDefaultDB(), getenv('TEST_TOKEN'));
     }
 
 }
