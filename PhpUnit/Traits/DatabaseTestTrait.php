@@ -56,7 +56,7 @@ trait DatabaseTestTrait
     protected function clearMongo(): void
     {
         $this->dm->getConfiguration()->setDefaultDB($this->getDmDatabaseName());
-        $this->dm->getConnection()->dropDatabase($this->dm->getConfiguration()->getDefaultDB());
+        $this->dm->getSchemaManager()->dropDatabases();
         $this->dm->getSchemaManager()->createCollections();
     }
 
