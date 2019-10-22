@@ -16,6 +16,7 @@
   "require": {
     "php": ">=7.3",
     "ext-json": "*",
+    "ext-mongodb": "*",
     "apitte/core": "^0.6",
     "brianium/paratest": "^3.1",
     "dg/bypass-finals": "^1.1",

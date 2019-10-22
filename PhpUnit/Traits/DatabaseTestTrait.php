@@ -121,7 +121,7 @@ trait DatabaseTestTrait
 
         $db->persist($object);
         if ($flush) {
-            $db->flush($object);
+            $db->flush();
         }
         unset($db);
     }
