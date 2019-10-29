@@ -100,10 +100,16 @@
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
     <rule ref="Squiz.Strings.DoubleQuoteUsage" />
     <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
+    <rule ref="Squiz.Functions.MultiLineFunctionDeclaration.Indent"/>
     <!-- Squiz coding standards -->
 
     <!-- PEAR coding standards -->
     <rule ref="PEAR.Commenting.ClassComment.Missing"/>
+    <rule ref="PEAR.Functions.FunctionCallSignature">
+        <properties>
+            <property name="allowMultipleArguments" value="false" />
+        </properties>
+    </rule>
     <!-- PEAR coding standards -->
 
     <!-- Generic coding standards -->
