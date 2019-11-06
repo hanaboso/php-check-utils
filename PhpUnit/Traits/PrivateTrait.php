@@ -53,7 +53,7 @@ trait PrivateTrait
      */
     protected function getPropertyByInstance($object, string $instance)
     {
-        if ($object instanceof $instance) {
+        if (get_class($object) === $instance) {
             return $object;
         }
 
