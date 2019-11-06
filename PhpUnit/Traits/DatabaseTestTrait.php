@@ -35,13 +35,20 @@ trait DatabaseTestTrait
         $connection = $this->em->getConnection();
         $parameters = $this->getProperty($connection, 'params');
         $this->setProperty($connection, 'params', array_merge($parameters, ['dbname' => $this->getEmDatabaseName()]));
-        $this->setProperty($this->em, 'conn', $connection);
+        [$name, $value] = $this->getPropertyByInstance($this->em, EntityManager::class);
+        $this->setProperty($value, 'conn', $connection);
+        $this->setProperty($this->em, $name, $value);
 
         $connection->exec('SET FOREIGN_KEY_CHECKS = 0;');
-        $tables = array_column($connection->fetchAll(sprintf(
-            "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%s' AND (AUTO_INCREMENT > 1 OR TABLE_ROWS > 0)",
-            $connection->getDatabase()
-        )), 'TABLE_NAME');
+        $tables = array_column(
+            $connection->fetchAll(
+                sprintf(
+                    "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%s' AND (AUTO_INCREMENT > 1 OR TABLE_ROWS > 0)",
+                    $connection->getDatabase()
+                )
+            ),
+            'TABLE_NAME'
+        );
         foreach ($connection->getSchemaManager()->listTables() as $table) {
             if (in_array($table->getName(), $tables, TRUE)) {
                 $this->em->getConnection()->exec(sprintf('TRUNCATE TABLE `%s`;', $table->getName()));
@@ -113,7 +120,7 @@ trait DatabaseTestTrait
     {
         if ($mysql && isset($this->em)) {
             $db = $this->em;
-        } elseif (!$mysql && isset($this->dm)) {
+        } else if (!$mysql && isset($this->dm)) {
             $db = $this->dm;
         } else {
             throw new LogicException('Database is not set');

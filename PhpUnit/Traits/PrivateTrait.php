@@ -47,6 +47,33 @@ trait PrivateTrait
 
     /**
      * @param mixed  $object
+     * @param string $instance
+     *
+     * @return mixed
+     */
+    protected function getPropertyByInstance($object, string $instance)
+    {
+        if ($object instanceof $instance) {
+            return $object;
+        }
+
+        $reflection = new ReflectionObject($object);
+        $properties = $reflection->getProperties();
+
+        foreach ($properties as $property) {
+            $property->setAccessible(TRUE);
+            $obj = $property->getValue($object);
+            if ($obj instanceof $instance) {
+
+                return [$property->getName(), $property->getValue($object)];
+            }
+        }
+
+        return NULL;
+    }
+
+    /**
+     * @param mixed  $object
      * @param string $methodName
      * @param array  $parameters
      *

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8283a382e1c307afea07b183e162ed35",
+    "content-hash": "7580a7f3dcc660efa4acb63a49136838",
     "packages": [
         {
             "name": "apitte/core",
