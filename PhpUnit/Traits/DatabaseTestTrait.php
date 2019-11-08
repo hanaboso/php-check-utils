@@ -43,7 +43,7 @@ trait DatabaseTestTrait
         $tables = array_column(
             $connection->fetchAll(
                 sprintf(
-                    "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%s' AND (AUTO_INCREMENT > 1 OR TABLE_ROWS > 0)",
+                    "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%s' AND (AUTO_INCREMENT > 1 OR TABLE_ROWS > 0) AND TABLE_TYPE = 'BASE TABLE'",
                     $connection->getDatabase()
                 )
             ),

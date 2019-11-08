@@ -10,6 +10,7 @@ use Contributte\Psr7\Psr7ServerRequest;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -103,12 +104,14 @@ trait ControllerTestTrait
      * @param array  $responseReplacements
      * @param array  $requestHttpReplacements
      * @param array  $requestBodyReplacements
+     * @param array  $requestHeadersReplacements
      */
     protected function assertResponse(
         string $path,
         array $responseReplacements = [],
         array $requestHttpReplacements = [],
-        array $requestBodyReplacements = []
+        array $requestBodyReplacements = [],
+        array $requestHeadersReplacements = []
     ): void
     {
         $expectedResponse = $this->getControllerResponse($path);
@@ -122,7 +125,7 @@ trait ControllerTestTrait
             $method,
             $url,
             $this->replaceDynamicData($body, $requestBodyReplacements),
-            $headers
+            $this->replaceDynamicData($headers, $requestHeadersReplacements)
         );
         $http     = $response[self::$STATUS];
         $body     = $this->replaceDynamicData($response[self::$BODY], $responseReplacements);
@@ -140,6 +143,73 @@ trait ControllerTestTrait
     }
 
     /**
+     * @param string $path
+     * @param string $uri
+     * @param array  $headers
+     * @param array  $replaceRequest
+     * @param array  $replaceResponse
+     */
+    protected function assertGraphQlRequest(
+        string $path,
+        string $uri,
+        array $headers = [],
+        array $replaceRequest = [],
+        array $replaceResponse = []
+    ): void
+    {
+        $request = NULL;
+        if (file_exists($path)) {
+            $request = file_get_contents($path);
+        }
+
+        if ($replaceRequest) {
+            foreach ($replaceRequest as $rep => $val) {
+                $request = str_replace($rep, is_null($val) ? 'null' : $val, $request ?: '');
+            }
+        }
+
+        $response = $this->sendGraphQlRequest($request, $uri, $headers);
+        $content  = $this->getContentFromFile($path);
+
+        if ($replaceResponse) {
+            array_walk_recursive(
+                $response,
+                static function (&$value, $key) use ($replaceResponse): void {
+                    if (isset($replaceResponse[$key])) {
+                        $value = $replaceResponse[$key];
+                    }
+                }
+            );
+        }
+
+        $message = sprintf(
+            'Response: %s%s%s%s',
+            PHP_EOL,
+            PHP_EOL,
+            json_encode($response, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
+            PHP_EOL
+        );
+
+        self::assertEquals($content, $response, $message);
+    }
+
+    /**
+     * @param string $request
+     * @param string $uri
+     * @param array  $headers
+     *
+     * @return array
+     */
+    protected function sendGraphQlRequest(string $request, string $uri, array $headers = []): array
+    {
+        $this->client->request('POST', $uri, ['query' => $request], [], $headers);
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+
+        return json_decode($response->getContent(), TRUE, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /**
      * @param string $method
      * @param string $url
      * @param array  $body
@@ -151,13 +221,17 @@ trait ControllerTestTrait
     {
         if (isset($this->dispatcher)) {
             $response = $this->dispatcher->dispatch(
-                new ApiRequest(new Psr7ServerRequest($method, $url, $headers,
-                    json_encode($body, JSON_THROW_ON_ERROR))),
+                new ApiRequest(
+                    new Psr7ServerRequest(
+                        $method, $url, $headers,
+                        json_encode($body, JSON_THROW_ON_ERROR)
+                    )
+                ),
                 new ApiResponse(new Psr7Response())
             );
 
             return [self::$BODY => $response->getJsonBody(), self::$STATUS => $response->getStatusCode()];
-        } elseif (isset($this->client)) {
+        } else if (isset($this->client)) {
             $this->client->request($method, $url, $body, [], $headers, (string) json_encode($body));
             $response = $this->client->getResponse();
 
@@ -262,14 +336,44 @@ trait ControllerTestTrait
     private function replaceDynamicData(array $data, array $replacements): array
     {
         if ($replacements) {
-            array_walk_recursive($data, static function (&$value, $key) use ($replacements): void {
-                if (isset($replacements[$key])) {
-                    $value = $replacements[$key];
+            array_walk_recursive(
+                $data,
+                static function (&$value, $key) use ($replacements): void {
+                    if (isset($replacements[$key])) {
+                        $value = $replacements[$key];
+                    }
                 }
-            });
+            );
         }
 
         return $data;
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return array
+     */
+    private function getContentFromFile(string $path): array
+    {
+        $path = str_replace('.graphql', '.json', $path);
+
+        if (!is_file($path)) {
+            file_put_contents(
+                $path,
+                json_encode(
+                    ['data' => []],
+                    JSON_FORCE_OBJECT | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR
+                ),
+                FILE_APPEND
+            );
+
+            exec(sprintf('chown %s %s', getenv('DEV_UID'), $path));
+            exec(sprintf('chgrp %s %s', getenv('DEV_GID'), $path));
+
+        }
+
+        return $this->getContent($path);
     }
 
 }
