@@ -49,12 +49,12 @@ trait PrivateTrait
      * @param mixed  $object
      * @param string $instance
      *
-     * @return mixed
+     * @return array
      */
-    protected function getPropertyByInstance($object, string $instance)
+    protected function getPropertyByInstance($object, string $instance): array
     {
         if (get_class($object) === $instance) {
-            return $object;
+            return [NULL, $object];
         }
 
         $reflection = new ReflectionObject($object);
@@ -69,7 +69,7 @@ trait PrivateTrait
             }
         }
 
-        return NULL;
+        return [NULL, NULL];
     }
 
     /**

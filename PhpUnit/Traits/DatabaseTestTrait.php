@@ -37,7 +37,10 @@ trait DatabaseTestTrait
         $this->setProperty($connection, 'params', array_merge($parameters, ['dbname' => $this->getEmDatabaseName()]));
         [$name, $value] = $this->getPropertyByInstance($this->em, EntityManager::class);
         $this->setProperty($value, 'conn', $connection);
-        $this->setProperty($this->em, $name, $value);
+
+        if ($name) {
+            $this->setProperty($this->em, $name, $value);
+        }
 
         $connection->exec('SET FOREIGN_KEY_CHECKS = 0;');
         $tables = array_column(
