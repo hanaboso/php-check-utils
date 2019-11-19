@@ -3,6 +3,9 @@ services:
     app:
         image: hanabosocom/php-base:php-7.3
         user: ${DEV_UID}:${DEV_GID}
+        environment:
+            COMPOSER_HOME: ${HOME}/dev/.composer
         volumes:
             - ./:/var/www
             - ${SSH_AUTH_SOCK}:/tmp/bound-ssh-agent
+            - ${HOME}/dev/.composer:${HOME}/dev/.composer
