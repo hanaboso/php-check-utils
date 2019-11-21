@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
@@ -64,9 +64,21 @@ trait ControllerTestTrait
     protected $session;
 
     /**
-     * @var TokenStorage
+     * @var UsageTrackingTokenStorage
      */
     protected $tokenStorage;
+
+    /**
+     * @param array $options
+     * @param array $server
+     */
+    protected function startClient(array $options = [], array $server = []): void
+    {
+        $this->client = self::createClient(
+            array_merge(['environment' => 'test', 'debug' => TRUE], $options),
+            $server
+        );
+    }
 
     /**
      * @param object $user
@@ -89,7 +101,7 @@ trait ControllerTestTrait
         $this->session->invalidate();
         $this->session->start();
 
-        $token = new $tokenClass($user, $password, $secureArea, ['test']);
+        $token = new $tokenClass($user, $password, $secureArea, ['admin']);
         $this->tokenStorage->setToken($token);
 
         $this->session->set(sprintf('%s%s', $secureKey, $secureArea), serialize($token));
