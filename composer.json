@@ -17,6 +17,7 @@
         "php": ">=7.3",
         "ext-json": "*",
         "ext-mongodb": "*",
+        "ext-pcov": "*",
         "apitte/core": "^0.6",
         "brianium/paratest": "^3.1",
         "dg/bypass-finals": "^1.1",
