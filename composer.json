@@ -10,7 +10,13 @@
     ],
     "autoload": {
         "psr-4": {
+            "HanabosoCodingStandard\\": "HanabosoCodingStandard/",
             "Hanaboso\\PhpCheckUtils\\PhpUnit\\": "PhpUnit/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PHP_CodeSniffer\\": "vendor/squizlabs/php_codesniffer/src"
         }
     },
     "require": {

@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 /**
  * Trait ControllerTestTrait
  *
- * @package Hanaboso\CommonsBundle\Traits
+ * @package Hanaboso\PhpCheckUtils\PhpUnit\Traits
  */
 trait ControllerTestTrait
 {
@@ -51,22 +51,22 @@ trait ControllerTestTrait
     /**
      * @var KernelBrowser
      */
-    protected $client;
+    protected KernelBrowser $client;
 
     /**
      * @var IDispatcher
      */
-    protected $dispatcher;
+    protected IDispatcher $dispatcher;
 
     /**
      * @var Session
      */
-    protected $session;
+    protected Session $session;
 
     /**
      * @var UsageTrackingTokenStorage
      */
-    protected $tokenStorage;
+    protected UsageTrackingTokenStorage $tokenStorage;
 
     /**
      * @param array $options
