@@ -1,10 +1,14 @@
 parameters:
 	reportUnmatchedIgnoredErrors: false
 	ignoreErrors:
-	    - '#T_ANON_CLASS#'
-	    - '#T_DOC_COMMENT_CLOSE_TAG#'
-	    - '#T_DOC_COMMENT_OPEN_TAG#'
-	    - '#T_DOC_COMMENT_STRING#'
-	    - '#T_DOC_COMMENT_TAG#'
-	    - '#T_DOC_COMMENT_WHITESPACE#'
-	    - '#T_STRING_CONCAT#'
+		- '#Call to an undefined method React\\Promise\\PromiseInterface::(otherwise|done|cancel|reject)\(\)\.#' # remove after install react/promises 3.0
+		- '#Call to an undefined method Doctrine\\Common\\Persistence\\ObjectRepository::*.#' # remove after better doctrine support
+		- '#Call to an undefined method Doctrine\\ORM\\EntityRepository::*.#' # remove after better doctrine support
+		- '#Call to an undefined method Doctrine\\ODM\\MongoDB\\DocumentRepository::*.#' # remove after better doctrine support
+		- '#T_ANON_CLASS#'
+		- '#T_DOC_COMMENT_CLOSE_TAG#'
+		- '#T_DOC_COMMENT_OPEN_TAG#'
+		- '#T_DOC_COMMENT_STRING#'
+		- '#T_DOC_COMMENT_TAG#'
+		- '#T_DOC_COMMENT_WHITESPACE#'
+		- '#T_STRING_CONCAT#'
