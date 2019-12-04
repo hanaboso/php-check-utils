@@ -23,10 +23,8 @@ final class InterfaceSniff extends SniffAbstract
     /**
      * @param File  $file
      * @param mixed $position
-     *
-     * @return int|void
      */
-    public function process(File $file, $position)
+    public function process(File $file, $position): void
     {
         $this->processCommenting($file, $position, self::TYPE_INTERFACE);
     }

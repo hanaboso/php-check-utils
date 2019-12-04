@@ -14,12 +14,12 @@ final class ConcatenationStringSniff implements Sniff
 {
 
     /**
-     * @var array
+     * @var string[]
      */
     public $allowedConstants = ['__DIR__'];
 
     /**
-     * @return array
+     * @return int[]
      */
     public function register(): array
     {

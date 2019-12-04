@@ -29,7 +29,7 @@ abstract class SniffAbstract implements Sniff
     ];
 
     /**
-     * @var array
+     * @var string[]
      */
     public $comments = [
         '{TYPE} {NAME}',
@@ -71,7 +71,7 @@ abstract class SniffAbstract implements Sniff
      * @param File $file
      * @param int  $position
      *
-     * @return array
+     * @return string[]
      */
     protected function getDocumentComment(File $file, int $position): array
     {
@@ -101,9 +101,7 @@ abstract class SniffAbstract implements Sniff
 
         return array_filter(
             array_map('trim', $result),
-            static function (string $item): bool {
-                return strlen($item) > 0;
-            }
+            static fn(string $item): bool => strlen($item) > 0
         );
     }
 
@@ -112,10 +110,8 @@ abstract class SniffAbstract implements Sniff
      * @param int         $position
      * @param string      $type
      * @param string|NULL $customName
-     *
-     * @return int|void
      */
-    protected function processCommenting(File $file, int $position, string $type, ?string $customName = NULL)
+    protected function processCommenting(File $file, int $position, string $type, ?string $customName = NULL): void
     {
         $position = $file->findNext(T_STRING, $position);
 
@@ -151,7 +147,8 @@ abstract class SniffAbstract implements Sniff
         string $type,
         string $string,
         ?string $customName = NULL
-    ): string {
+    ): string
+    {
         return str_replace(
             self::REPLACE,
             [

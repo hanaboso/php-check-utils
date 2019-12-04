@@ -13,7 +13,7 @@ final class ConstructorSniff extends SniffAbstract
 {
 
     /**
-     * @var array
+     * @var string[]
      */
     public $comments = ['{NAME} constructor.'];
 
@@ -33,10 +33,8 @@ final class ConstructorSniff extends SniffAbstract
     /**
      * @param File  $file
      * @param mixed $position
-     *
-     * @return int|void
      */
-    public function process(File $file, $position)
+    public function process(File $file, $position): void
     {
         $tokens = $file->getTokens();
 

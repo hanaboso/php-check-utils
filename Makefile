@@ -29,7 +29,7 @@ codesniffer:
 	$(DE) ./vendor/bin/phpcs --standard=./tests/ruleset.xml --colors -p HanabosoCodingStandard PhpUnit
 
 phpstan:
-	$(DE) ./vendor/bin/phpstan analyse -c ./phpstan.neon -l 7 HanabosoCodingStandard PhpUnit
+	$(DE) ./vendor/bin/phpstan analyse -c ./phpstan.neon -l 8 HanabosoCodingStandard PhpUnit
 
 test: docker-up-force composer-install fasttest
 
