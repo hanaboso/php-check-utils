@@ -90,7 +90,8 @@ abstract class SniffAbstract implements Sniff
                 $isStringOrTagCharacter = in_array($token[self::CODE], [T_DOC_COMMENT_STRING, T_DOC_COMMENT_TAG], TRUE);
 
                 if ($isStringOrTagCharacter || $isWhiteSpace && !$isWhiteSpaceNewLine) {
-                    $result[$iterator] = sprintf('%s%s', $result[$iterator] ?? '', $token[self::CONTENT]);
+                    $line              = sprintf('%s%s', $result[$iterator] ?? '', $token[self::CONTENT]);
+                    $result[$iterator] = preg_replace('!\s+!', ' ', $line);
                 }
 
                 if ($isWhiteSpace && $isWhiteSpaceNewLine) {
