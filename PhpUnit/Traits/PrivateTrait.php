@@ -2,7 +2,7 @@
 
 namespace Hanaboso\PhpCheckUtils\PhpUnit\Traits;
 
-use ReflectionClass;
+use LogicException;
 use ReflectionException;
 use ReflectionObject;
 
@@ -24,48 +24,54 @@ trait PrivateTrait
     protected function setProperty($object, $propertyName, $value): void
     {
         $reflection = new ReflectionObject($object);
+
         do {
             if ($reflection->hasProperty($propertyName)) {
-                break;
+                $property = $reflection->getProperty($propertyName);
+                $property->setAccessible(TRUE);
+                $property->setValue($object, $value);
+
+                return;
             }
+
             $reflection = $reflection->getParentClass();
         } while ($reflection);
 
-        $property = $reflection->getProperty($propertyName);
-        $property->setAccessible(TRUE);
-        $property->setValue($object, $value);
+        throw new LogicException(sprintf("Property '%s' Not Found!", $propertyName));
     }
 
     /**
-     * @param mixed  $object
+     * @param object $object
      * @param string $propertyName
      *
      * @return mixed
      * @throws ReflectionException
      */
-    protected function getProperty($object, $propertyName)
+    protected function getProperty(object $object, string $propertyName)
     {
         $reflection = new ReflectionObject($object);
+
         do {
             if ($reflection->hasProperty($propertyName)) {
-                break;
+                $property = $reflection->getProperty($propertyName);
+                $property->setAccessible(TRUE);
+
+                return $property->getValue($object);
             }
+
             $reflection = $reflection->getParentClass();
         } while ($reflection);
 
-        $property = $reflection->getProperty($propertyName);
-        $property->setAccessible(TRUE);
-
-        return $property->getValue($object);
+        throw new LogicException(sprintf("Property '%s' Not Found!", $propertyName));
     }
 
     /**
-     * @param mixed  $object
+     * @param object $object
      * @param string $instance
      *
      * @return array
      */
-    protected function getPropertyByInstance($object, string $instance): array
+    protected function getPropertyByInstance(object $object, string $instance): array
     {
         if (get_class($object) === $instance) {
             return [NULL, $object];
@@ -87,27 +93,29 @@ trait PrivateTrait
     }
 
     /**
-     * @param mixed  $object
+     * @param object $object
      * @param string $methodName
      * @param array  $parameters
      *
      * @return mixed
      * @throws ReflectionException
      */
-    protected function invokeMethod($object, $methodName, array $parameters = [])
+    protected function invokeMethod(object $object, string $methodName, array $parameters = [])
     {
-        $reflection = new ReflectionClass(get_class($object));
+        $reflection = new ReflectionObject($object);
+
         do {
             if ($reflection->hasMethod($methodName)) {
-                break;
+                $method = $reflection->getMethod($methodName);
+                $method->setAccessible(TRUE);
+
+                return $method->invokeArgs($object, $parameters);
             }
+
             $reflection = $reflection->getParentClass();
         } while ($reflection);
 
-        $method = $reflection->getMethod($methodName);
-        $method->setAccessible(TRUE);
-
-        return $method->invokeArgs($object, $parameters);
+        throw new LogicException(sprintf("Method '%s' Not Found!", $methodName));
     }
 
 }

@@ -4,8 +4,16 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Hanaboso, s.r.o.",
-            "email": "venca.email@gmail.com"
+            "name": "Hanaboso s.r.o.",
+            "email": "info@hanaboso.com"
+        },
+        {
+            "name": "Radek Jirsa",
+            "email": "jirsa.r@hanaboso.com"
+        },
+        {
+            "name": "Radek Brůha",
+            "email": "bruha.r@hanaboso.com"
         }
     ],
     "autoload": {
@@ -29,6 +37,7 @@
         "dg/bypass-finals": "^1.1",
         "doctrine/mongodb-odm": "^2.0",
         "doctrine/orm": "^2.7",
+        "php-mock/php-mock-phpunit": "^2.5",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine": "^0.12",
         "phpstan/phpstan-nette": "^0.12",

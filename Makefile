@@ -26,7 +26,7 @@ composer-outdated:
 
 # Tests
 codesniffer:
-	$(DE) ./vendor/bin/phpcs --standard=./tests/ruleset.xml --colors -p HanabosoCodingStandard PhpUnit
+	$(DE) ./vendor/bin/phpcs --standard=./tests/ruleset.xml HanabosoCodingStandard PhpUnit
 
 phpstan:
 	$(DE) ./vendor/bin/phpstan analyse -c ./phpstan.neon -l 8 HanabosoCodingStandard PhpUnit

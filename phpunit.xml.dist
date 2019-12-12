@@ -7,6 +7,12 @@
          failOnWarning="true"
          verbose="true"
 >
+
+    <php>
+        <env name="APP_ENV" value="test" force="true"/>
+        <env name="APP_DEBUG" value="1" force="true"/>
+    </php>
+
     <extensions>
         <extension class="Hanaboso\PhpCheckUtils\PhpUnit\Hooks\FinalMockHook"/>
     </extensions>
