@@ -226,10 +226,17 @@ trait ControllerTestTrait
      * @param string $url
      * @param array  $body
      * @param array  $headers
+     * @param array  $files
      *
      * @return array
      */
-    protected function sendRequest(string $method, string $url, array $body = [], array $headers = []): array
+    protected function sendRequest(
+        string $method,
+        string $url,
+        array $body = [],
+        array $headers = [],
+        array $files = []
+    ): array
     {
         if (isset($this->dispatcher)) {
             $response = $this->dispatcher->dispatch(
@@ -244,7 +251,7 @@ trait ControllerTestTrait
 
             return [self::$BODY => $response->getJsonBody(), self::$STATUS => $response->getStatusCode()];
         } else if (isset($this->client)) {
-            $this->client->request($method, $url, $body, [], $headers, (string) json_encode($body));
+            $this->client->request($method, $url, $body, $files, $headers, (string) json_encode($body));
             $response = $this->client->getResponse();
 
             return [

@@ -6,5 +6,8 @@ COVERAGE=$(cat /tmp/phpunit-coverage.log | grep -oE '^  Lines.+%' | grep -oE ' \
 
 if [[ $COVERAGE -lt $1 ]];
 then echo -e "\033[1;31mSorry, your coverage is too low ($COVERAGE% < $1%)!\033[0m"; exit 1;
-else echo -e "\033[1;32mCoverage ($COVERAGE%) is not great, but not terrible ($1%).\033[0m";
+else if [[ $COVERAGE -eq 100 ]];
+    then echo -e "\033[1;32mFull coverage. Good job! ($COVERAGE% / 100)!\033[0m"; exit 1;
+    else echo -e "\033[1;32mCoverage ($COVERAGE%) is not great, but not terrible ($1%).\033[0m";
+    fi
 fi
