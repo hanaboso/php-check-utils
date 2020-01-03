@@ -52,6 +52,7 @@ trait DatabaseTestTrait
             ),
             'TABLE_NAME'
         );
+
         foreach ($connection->getSchemaManager()->listTables() as $table) {
             if (in_array($table->getName(), $tables, TRUE)) {
                 $this->em->getConnection()->exec(sprintf('TRUNCATE TABLE `%s`;', $table->getName()));

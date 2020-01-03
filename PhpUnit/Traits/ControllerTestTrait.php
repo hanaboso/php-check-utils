@@ -10,7 +10,6 @@ use Contributte\Psr7\Psr7ServerRequest;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -26,27 +25,27 @@ trait ControllerTestTrait
     /**
      * @var string
      */
-    protected static $HTTP = 'http';
+    protected static string $HTTP = 'http';
 
     /**
      * @var string
      */
-    protected static $BODY = 'body';
+    protected static string $BODY = 'body';
 
     /**
      * @var string
      */
-    protected static $HEADERS = 'headers';
+    protected static string $HEADERS = 'headers';
 
     /**
      * @var string
      */
-    protected static $STATUS = 'status';
+    protected static string $STATUS = 'status';
 
     /**
      * @var string
      */
-    protected static $REQUEST = '#(GET|POST|PUT|PATCH|DELETE) /#';
+    protected static string $REQUEST = '#(GET|POST|PUT|PATCH|DELETE) /#';
 
     /**
      * @var KernelBrowser
@@ -215,7 +214,6 @@ trait ControllerTestTrait
     protected function sendGraphQlRequest(string $request, string $uri, array $headers = []): array
     {
         $this->client->request('POST', $uri, ['query' => $request], [], $headers);
-        /** @var Response $response */
         $response = $this->client->getResponse();
 
         return json_decode($response->getContent(), TRUE, 512, JSON_THROW_ON_ERROR);

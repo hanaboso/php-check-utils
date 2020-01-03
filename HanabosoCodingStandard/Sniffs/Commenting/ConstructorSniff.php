@@ -15,12 +15,12 @@ final class ConstructorSniff extends SniffAbstract
     /**
      * @var string[]
      */
-    public $comments = ['{NAME} constructor.'];
+    public array $comments = ['{NAME} constructor.'];
 
     /**
      * @var string
      */
-    public $anonymousName = 'Anonymous';
+    public string $anonymousName = 'Anonymous';
 
     /**
      * @return int[]

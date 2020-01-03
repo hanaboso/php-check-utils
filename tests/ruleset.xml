@@ -14,7 +14,6 @@
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireYodaComparison"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit"/>
         <exclude name="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException"/>
-        <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.UselessDocComment"/>
         <exclude name="SlevomatCodingStandard.TypeHints.LongTypeHints.UsedLongTypeHint"/>
         <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification"/>
         <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification"/>
@@ -42,7 +41,6 @@
         <exclude name="SlevomatCodingStandard.Functions.StaticClosure"/>
         <exclude name="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
         <!-- Exclude from version 4.8 -->
-        <exclude name="SlevomatCodingStandard.ControlStructures.ControlStructureSpacing"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireTernaryOperator"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator"/>
         <exclude name="SlevomatCodingStandard.Operators.RequireOnlyStandaloneIncrementAndDecrementOperators"/>
@@ -54,6 +52,15 @@
         <exclude name="SlevomatCodingStandard.Operators.DisallowEqualOperators"/>
         <exclude name="SlevomatCodingStandard.TypeHints.DisallowArrayTypeHintSyntax"/>
         <exclude name="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint"/>
+        <!-- Exclude from version 6.0.0 -->
+        <exclude name="SlevomatCodingStandard.Commenting.UselessFunctionDocComment"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.UselessAnnotation"/>
+        <exclude name="SlevomatCodingStandard.Functions.DisallowArrowFunction"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing"/>
+        <exclude name="SlevomatCodingStandard.PHP.DisallowReference"/>
     </rule>
 
     <!-- Slevomat coding standards -->

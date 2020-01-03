@@ -84,7 +84,6 @@ trait PrivateTrait
             $property->setAccessible(TRUE);
             $obj = $property->getValue($object);
             if ($obj instanceof $instance) {
-
                 return [$property->getName(), $property->getValue($object)];
             }
         }

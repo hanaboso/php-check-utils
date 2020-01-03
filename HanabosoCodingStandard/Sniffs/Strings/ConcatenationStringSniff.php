@@ -16,7 +16,7 @@ final class ConcatenationStringSniff implements Sniff
     /**
      * @var string[]
      */
-    public $allowedConstants = ['__DIR__'];
+    public array $allowedConstants = ['__DIR__'];
 
     /**
      * @return int[]
