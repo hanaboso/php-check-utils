@@ -10,7 +10,7 @@
         </properties>
     </rule>
 
-    <rule ref="./../vendor/slevomat/coding-standard/SlevomatCodingStandard/ruleset.xml">
+    <rule ref="./../../slevomat/coding-standard/SlevomatCodingStandard/ruleset.xml">
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireYodaComparison"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit"/>
         <exclude name="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly.ReferencedGeneralException"/>
@@ -61,6 +61,8 @@
         <exclude name="SlevomatCodingStandard.Functions.DisallowArrowFunction"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing"/>
         <exclude name="SlevomatCodingStandard.PHP.DisallowReference"/>
+        <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion"/>
+        <exclude name="SlevomatCodingStandard.Numbers.DisallowNumericLiteralSeparator"/>
     </rule>
 
     <!-- Slevomat coding standards -->
