@@ -2,7 +2,7 @@
     "name": "hanaboso/php-check-utils",
     "description": "Utils for php development - CodeSniffer, PhpStan, PhpStorm",
     "license": "MIT",
-    "version": "1.1.5",
+    "version": "1.1.7",
     "authors": [
         {
             "name": "Hanaboso s.r.o.",
