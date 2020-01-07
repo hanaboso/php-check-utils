@@ -35,7 +35,10 @@ services:
 					message: 'use logger instead'
 				-
 					function: 'file_put_content()'
-					message: 'use logger instead'
+					message: 'use Hanaboso\Utils\File\Files::putContent() or logger instead'
+				-
+					function: 'file_get_content()'
+					message: 'use Hanaboso\Utils\File\Files::getContent() instead'
 				-
 					function: 'json_decode()'
 					message: 'use Hanaboso\Utils\String\Json::decode() instead'
