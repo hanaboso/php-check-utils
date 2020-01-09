@@ -1,0 +1,28 @@
+language: php
+
+before_install:
+    - phpenv config-rm xdebug.ini || return 0
+    - pecl install pcov
+
+install:
+    - travis_retry composer install --no-progress --prefer-dist --ignore-platform-reqs
+
+script:
+    - ./vendor/bin/phpcs --standard=./tests/ruleset.xml HanabosoCodingStandard PhpUnit
+    - ./vendor/bin/phpstan analyse -c ./tests/phpstan.neon -l 8 HanabosoCodingStandard PhpUnit
+
+php:
+    - 7.4
+
+branches:
+    only:
+        - master
+
+sudo: false
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+notifications:
+    email: false

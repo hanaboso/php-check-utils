@@ -1,5 +1,8 @@
-PHP CHECK UTILS
+Hanaboso - PHP CHECK UTILS
 ===============
+
+[![Build Status](https://travis-ci.org/hanaboso/php-check-utils.svg?branch=master)](https://travis-ci.org/hanaboso/php-check-utils)
+[![Downloads](https://img.shields.io/packagist/dt/hanaboso/php-check-utils)](https://packagist.org/packages/hanaboso/php-check-utils)
 
 Installation
 -----------
@@ -45,15 +48,11 @@ PhpStan
 * PHPStan docs: https://github.com/phpstan/phpstan
 * run PHPStan
 ```bash
-./vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/ tests/
+./vendor/bin/phpstan analyse -c phpstan.neon -l 8 src/ tests/
 ```
 * phpstan.neon for app
 ```neon
 includes:
-    - vendor/phpstan/phpstan-symfony/extension.neon # symfony extension
-    - vendor/phpstan/phpstan-doctrine/extension.neon # doctrine extension
-    - vendor/phpstan/phpstan-phpunit/extension.neon # phpunit extension
-    - vendor/phpstan/phpstan-phpunit/rules.neon # phpunit rules
     - vendor/hanaboso/php-check-utils/phpstan.neon # hanaboso rules
 parameters
     excludes_analyse:
@@ -63,7 +62,14 @@ parameters
 
 ```
 
-PhpStorm
+CodeCoverage
+-------
+* run Coverage.sh
+```bash
+./vendor/hanaboso/php-check-utils/bin/coverage.sh 100
+```
+
+PhpStorm - Code Style
 --------
 * Import code style XML file from ./vendor/hanaboso/php-check-utils/phpstorm.xml to PhpStorm
 * Open import window
