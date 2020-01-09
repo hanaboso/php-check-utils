@@ -2,7 +2,12 @@
 
 time -f "Elapsed time: %e s." php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p 8 --coverage-text --whitelist src tests | tee /tmp/phpunit-coverage.log
 
-COVERAGE=$(cat /tmp/phpunit-coverage.log | grep -oE '^  Lines.+%' | grep -oE ' \d+' | grep -oE '\d+')
+DISTR=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release);
+
+if [[ $DISTR == 'alpine' ]];
+  then COVERAGE=$(cat /tmp/phpunit-coverage.log | grep -oE '^  Lines.+%' | grep -oE ' \d+' | grep -oE '\d+');
+  else COVERAGE=$(cat /tmp/phpunit-coverage.log | grep -oE '^  Lines.+%' | grep -oE ' [[:digit:]]+' | grep -oE '[[:digit:]]+');
+fi
 
 if [[ $COVERAGE -lt $1 ]];
 then echo -e "\033[1;31mSorry, your coverage is too low ($COVERAGE% < $1%)!\033[0m"; exit 1;
