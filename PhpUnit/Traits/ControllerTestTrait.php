@@ -5,6 +5,7 @@ namespace Hanaboso\PhpCheckUtils\PhpUnit\Traits;
 use Apitte\Core\Dispatcher\IDispatcher;
 use Apitte\Core\Http\ApiRequest;
 use Apitte\Core\Http\ApiResponse;
+use Closure;
 use Contributte\Psr7\Psr7Response;
 use Contributte\Psr7\Psr7ServerRequest;
 use LogicException;
@@ -111,18 +112,20 @@ trait ControllerTestTrait
     }
 
     /**
-     * @param string $path
-     * @param array  $responseReplacements
-     * @param array  $requestHttpReplacements
-     * @param array  $requestBodyReplacements
-     * @param array  $requestHeadersReplacements
+     * @param string       $path
+     * @param array        $responseReplacements
+     * @param array        $requestHttpReplacements
+     * @param array        $requestBodyReplacements
+     * @param array        $requestHeadersReplacements
+     * @param Closure|null $bodyCallback
      */
     protected function assertResponse(
         string $path,
         array $responseReplacements = [],
         array $requestHttpReplacements = [],
         array $requestBodyReplacements = [],
-        array $requestHeadersReplacements = []
+        array $requestHeadersReplacements = [],
+        ?Closure $bodyCallback = NULL
     ): void
     {
         $expectedResponse = $this->getControllerResponse($path);
@@ -136,7 +139,9 @@ trait ControllerTestTrait
             $method,
             $url,
             $this->replaceDynamicData($body, $requestBodyReplacements),
-            $this->replaceDynamicData($headers, $requestHeadersReplacements)
+            $this->replaceDynamicData($headers, $requestHeadersReplacements),
+            [],
+            $bodyCallback
         );
         $http     = $response[self::$STATUS];
         $body     = $this->replaceDynamicData($response[self::$BODY], $responseReplacements);
@@ -220,11 +225,12 @@ trait ControllerTestTrait
     }
 
     /**
-     * @param string $method
-     * @param string $url
-     * @param array  $body
-     * @param array  $headers
-     * @param array  $files
+     * @param string       $method
+     * @param string       $url
+     * @param array        $body
+     * @param array        $headers
+     * @param array        $files
+     * @param Closure|null $bodyCallback
      *
      * @return array
      */
@@ -233,27 +239,38 @@ trait ControllerTestTrait
         string $url,
         array $body = [],
         array $headers = [],
-        array $files = []
+        array $files = [],
+        ?Closure $bodyCallback = NULL
     ): array
     {
         if (isset($this->dispatcher)) {
             $response = $this->dispatcher->dispatch(
                 new ApiRequest(
                     new Psr7ServerRequest(
-                        $method, $url, $headers,
+                        $method,
+                        $url,
+                        $headers,
                         json_encode($body, JSON_THROW_ON_ERROR)
                     )
                 ),
                 new ApiResponse(new Psr7Response())
             );
 
-            return [self::$BODY => $response->getJsonBody(), self::$STATUS => $response->getStatusCode()];
+            return [
+                self::$BODY   => $bodyCallback ? $bodyCallback($response) : $response->getJsonBody(),
+                self::$STATUS => $response->getStatusCode(),
+            ];
         } else if (isset($this->client)) {
             $this->client->request($method, $url, $body, $files, $headers, (string) json_encode($body));
             $response = $this->client->getResponse();
 
             return [
-                self::$BODY   => json_decode((string) $response->getContent(), TRUE, 512, JSON_THROW_ON_ERROR),
+                self::$BODY   => $bodyCallback ? $bodyCallback($response) : json_decode(
+                    (string) $response->getContent(),
+                    TRUE,
+                    512,
+                    JSON_THROW_ON_ERROR
+                ),
                 self::$STATUS => $response->getStatusCode(),
             ];
         } else {
