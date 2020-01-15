@@ -16,10 +16,10 @@ docker-down-clean: .env
 
 # Composer
 composer-install:
-	$(DE) composer install --ignore-platform-reqs
+	$(DE) composer install --ignore-platform-reqs --no-suggest
 
 composer-update:
-	$(DE) composer update --ignore-platform-reqs
+	$(DE) composer update --ignore-platform-reqs --no-suggest
 
 composer-outdated:
 	$(DE) composer outdated

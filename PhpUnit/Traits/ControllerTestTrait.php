@@ -117,7 +117,7 @@ trait ControllerTestTrait
      * @param array        $requestHttpReplacements
      * @param array        $requestBodyReplacements
      * @param array        $requestHeadersReplacements
-     * @param Closure|null $bodyCallback
+     * @param Closure|NULL $bodyCallback
      */
     protected function assertResponse(
         string $path,
@@ -230,7 +230,7 @@ trait ControllerTestTrait
      * @param array        $body
      * @param array        $headers
      * @param array        $files
-     * @param Closure|null $bodyCallback
+     * @param Closure|NULL $bodyCallback
      *
      * @return array
      */
