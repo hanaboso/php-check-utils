@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-while [[ "$#" -gt 0 ]]; do case $1 in
+while [ "$#" -gt 0 ]; do case $1 in
   -c|--coverage) coverage="$2"; shift;;
   -p|--processes) processes="$2"; shift;;
   -t|--tests) tests="$2"; shift;;
@@ -8,19 +8,19 @@ while [[ "$#" -gt 0 ]]; do case $1 in
   *) echo -e "\033[1;31mUsage: coverage.sh -c <coverage> -p <processes> -t <tests> -w <whitelist>\033[0m"; exit 1;;
 esac; shift; done
 
-if [ "$coverage" == '' ];
+if [ "$coverage" = '' ];
     then coverage=100;
 fi
 
-if [ "$processes" == '' ];
+if [ "$processes" = '' ];
     then processes=8;
 fi
 
-if [ "$tests" == '' ];
+if [ "$tests" = '' ];
     then tests='tests';
 fi
 
-if [ "$whitelist" == '' ];
+if [ "$whitelist" = '' ];
     then whitelist='src';
 fi
 
