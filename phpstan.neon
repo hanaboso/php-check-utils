@@ -79,8 +79,14 @@ services:
 		tags:
 			- phpstan.rules.rule
 
+	-
+		class: PHPStan\Rules\Cast\UselessCastRule
+		arguments:
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+		tags:
+			- phpstan.rules.rule
+
 rules:
-	- PHPStan\Rules\Cast\UselessCastRule
 	- PHPStan\Rules\Classes\RequireParentConstructCallRule
 	- PHPStan\Rules\DisallowedConstructs\DisallowedImplicitArrayCreationRule
 	- PHPStan\Rules\ForeachLoop\OverwriteVariablesWithForeachRule

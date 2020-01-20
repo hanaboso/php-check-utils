@@ -24,6 +24,26 @@ trait ControllerTestTrait
 {
 
     /**
+     * @var KernelBrowser
+     */
+    protected KernelBrowser $client;
+
+    /**
+     * @var IDispatcher
+     */
+    protected IDispatcher $dispatcher;
+
+    /**
+     * @var Session
+     */
+    protected Session $session;
+
+    /**
+     * @var UsageTrackingTokenStorage
+     */
+    protected UsageTrackingTokenStorage $tokenStorage;
+
+    /**
      * @var string
      */
     protected static string $HTTP = 'http';
@@ -47,26 +67,6 @@ trait ControllerTestTrait
      * @var string
      */
     protected static string $REQUEST = '#(GET|POST|PUT|PATCH|DELETE) /#';
-
-    /**
-     * @var KernelBrowser
-     */
-    protected KernelBrowser $client;
-
-    /**
-     * @var IDispatcher
-     */
-    protected IDispatcher $dispatcher;
-
-    /**
-     * @var Session
-     */
-    protected Session $session;
-
-    /**
-     * @var UsageTrackingTokenStorage
-     */
-    protected UsageTrackingTokenStorage $tokenStorage;
 
     /**
      * @param array $options
@@ -135,6 +135,7 @@ trait ControllerTestTrait
         $headers          = $request[self::$HEADERS] ?? [];
 
         [$method, $url] = explode(' ', $http);
+
         $response = $this->sendRequest(
             $method,
             $url,

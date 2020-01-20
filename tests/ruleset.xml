@@ -38,8 +38,6 @@
         <exclude name="SlevomatCodingStandard.ControlStructures.DisallowEmpty"/>
         <!-- Exclude from version 4.7 -->
         <exclude name="SlevomatCodingStandard.ControlStructures.NewWithoutParentheses"/>
-        <exclude name="SlevomatCodingStandard.Functions.StaticClosure"/>
-        <exclude name="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition"/>
         <!-- Exclude from version 4.8 -->
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireTernaryOperator"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator"/>
@@ -63,6 +61,9 @@
         <exclude name="SlevomatCodingStandard.PHP.DisallowReference"/>
         <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion"/>
         <exclude name="SlevomatCodingStandard.Numbers.DisallowNumericLiteralSeparator"/>
+        <!-- Exclude from version 6.1.0 -->
+        <exclude name="SlevomatCodingStandard.Files.LineLength.LineTooLong"/>
+        <exclude name="SlevomatCodingStandard.Commenting.RequireOneLineDocComment.MultiLineDocComment"/>
     </rule>
 
     <!-- Slevomat coding standards -->
@@ -117,12 +118,31 @@
     <rule ref="PEAR.Commenting.ClassComment.Missing"/>
     <!-- PEAR coding standards -->
 
+    <!-- PSR coding standards -->
+    <rule ref='PSR1'/>
+
+    <rule ref="PSR2.ControlStructures.ControlStructureSpacing"/>
+    <rule ref="PSR2.Files.ClosingTag"/>
+    <rule ref="PSR2.Files.EndFileNewline"/>
+    <rule ref="PSR2.Methods.FunctionCallSignature"/>
+    <rule ref="PSR2.Methods.FunctionClosingBrace"/>
+    <rule ref="PSR2.Methods.MethodDeclaration"/>
+    <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
+    <rule ref="PSR2.Namespaces.UseDeclaration"/>
+    <!-- PSR coding standards -->
+
     <!-- Generic coding standards -->
     <rule ref="Generic.PHP.UpperCaseConstant"/>
 
     <rule ref="Generic.WhiteSpace.ScopeIndent">
         <properties>
             <property name="indent" value="4"/>
+        </properties>
+    </rule>
+
+    <rule ref="Generic.Formatting.MultipleStatementAlignment">
+        <properties>
+            <property name="error" value="true" />
         </properties>
     </rule>
     <!-- Generic coding standards -->
