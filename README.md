@@ -2,6 +2,7 @@ Hanaboso - PHP CHECK UTILS
 ===============
 
 [![Build Status](https://travis-ci.org/hanaboso/php-check-utils.svg?branch=master)](https://travis-ci.org/hanaboso/php-check-utils)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen)](https://img.shields.io/badge/PHPStan-level%208-brightgreen)
 [![Downloads](https://img.shields.io/packagist/dt/hanaboso/php-check-utils)](https://packagist.org/packages/hanaboso/php-check-utils)
 
 Installation
