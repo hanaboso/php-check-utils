@@ -39,6 +39,11 @@ final class MagicCallSniff implements Sniff
         for (; $i < $end; $i++) {
             $type = $tokens[$i]['type'];
             if ($type === 'T_VARIABLE' && $tokens[$i]['content'] == '$this') {
+                // Skip whitespaces to check that next token is a comma
+                while (($tokens[++$i]['type'] ?? '') === 'T_WHITESPACE');
+                if ($tokens[$i]['type'] !== 'T_COMMA') {
+                    return;
+                }
                 $caller = $this->getSelfFqn($file);
 
                 break;
@@ -78,7 +83,13 @@ final class MagicCallSniff implements Sniff
                 break;
             }
         }
-        $method = $tokens[$file->findPrevious(T_CONSTANT_ENCAPSED_STRING, $end)]['content'];
+
+        $methodPos = $file->findPrevious(T_CONSTANT_ENCAPSED_STRING, $end);
+        if ($methodPos <= $i) {
+            return;
+        }
+
+        $method = $tokens[$methodPos]['content'];
         if (!$caller || !$method) {
             return;
         }

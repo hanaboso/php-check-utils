@@ -15,10 +15,25 @@ final class MagicCallSniffTest extends KernelTestCaseAbstract
 {
 
     /**
+     * @var string
+     */
+    private string $foo = 'bar';
+
+    /**
      *
      */
     public function errors(): void
     {
+        // Negative
+        $arr = ['foo', 'bar'];
+        $arr = ['this', 'bar'];
+        $arr = [$this->foo, 'bar'];
+        $arr = [$this->foo, $this->foo];
+        $arr = [$this => 'foo', 'bar'];
+        $arr = [$this, 'foobar'];
+
+        // Positive
+        $arr = [$this, 'compare'];
         usort($arr, [$this, 'compare']);
         usort($arr, [Config::class, 'printConfigData']);
         usort($arr, [MagicCallSniffTest::class, 'compare']);
@@ -62,16 +77,17 @@ final class MagicCallSniffTest extends KernelTestCaseAbstract
         ];
 
         $res = $this->processSniffTest(__DIR__ . '/MagicCallSniffTest.php', MagicCallSniff::class);
-        self::assertCount(7, $res->getErrors());
+        self::assertCount(8, $res->getErrors());
         self::assertEquals(
             [
-                22 => [22 => [$item]],
-                23 => [22 => [$item]],
-                24 => [22 => [$item]],
-                25 => [22 => [$item]],
-                28 => [14 => [$item]],
-                32 => [14 => [$item]],
-                36 => [14 => [$item]],
+                36 => [17 => [$item]],
+                37 => [22 => [$item]],
+                38 => [22 => [$item]],
+                39 => [22 => [$item]],
+                40 => [22 => [$item]],
+                43 => [14 => [$item]],
+                47 => [14 => [$item]],
+                51 => [14 => [$item]],
             ],
             $res->getErrors()
         );
