@@ -10,6 +10,7 @@ install:
 script:
     - ./vendor/bin/phpcs --standard=./tests/ruleset.xml HanabosoCodingStandard PhpUnit
     - ./vendor/bin/phpstan analyse -c ./tests/phpstan.neon -l 8 HanabosoCodingStandard PhpUnit
+    - ./vendor/bin/paratest -c ./phpunit.xml.dist -p 4 tests/Unit
 
 php:
     - 7.4

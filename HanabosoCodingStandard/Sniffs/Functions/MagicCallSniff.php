@@ -15,6 +15,8 @@ use Throwable;
 final class MagicCallSniff implements Sniff
 {
 
+    public const ERROR_MESSAGE = 'Callback from array is not allowed, use anonymous function instead.';
+
     /**
      * @return int[]
      */
@@ -91,11 +93,7 @@ final class MagicCallSniff implements Sniff
         /** @phpstan-var class-string $methodName */
         $methodName = trim($method, '\'');
         if ($class->hasMethod($methodName)) {
-            $file->addError(
-                'Callback from array is not allowed, use anonymous function instead.',
-                $position,
-                'Comment'
-            );
+            $file->addError(self::ERROR_MESSAGE, $position, 'Comment');
         }
     }
 

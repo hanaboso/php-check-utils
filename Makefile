@@ -16,21 +16,24 @@ docker-down-clean: .env
 
 # Composer
 composer-install:
-	$(DE) composer install --ignore-platform-reqs --no-suggest
+	$(DE) composer install --no-suggest
 
 composer-update:
-	$(DE) composer update --ignore-platform-reqs --no-suggest
+	$(DE) composer update --no-suggest
 
 composer-outdated:
 	$(DE) composer outdated
 
 # Tests
-codesniffer:
+phpcodesniffer:
 	$(DE) ./vendor/bin/phpcs --standard=./tests/ruleset.xml HanabosoCodingStandard PhpUnit
 
 phpstan:
 	$(DE) ./vendor/bin/phpstan analyse -c ./tests/phpstan.neon -l 8 HanabosoCodingStandard PhpUnit
 
+phpunit:
+	$(DE) ./vendor/bin/paratest -c ./phpunit.xml.dist -p 4 tests/Unit
+
 test: docker-up-force composer-install fasttest
 
-fasttest: codesniffer phpstan
+fasttest: phpcodesniffer phpstan phpunit
