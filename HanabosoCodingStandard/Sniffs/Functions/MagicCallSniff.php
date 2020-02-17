@@ -38,6 +38,12 @@ final class MagicCallSniff implements Sniff
         $i      = ++$position;
         for (; $i < $end; $i++) {
             $type = $tokens[$i]['type'];
+            // Skips nested arrays
+            if ($type === 'T_OPEN_SHORT_ARRAY') {
+                $i = $tokens[$i]['bracket_closer'] - 1;
+
+                continue;
+            }
             if ($type === 'T_VARIABLE' && $tokens[$i]['content'] == '$this') {
                 // Skip whitespaces to check that next token is a comma
                 while (($tokens[++$i]['type'] ?? '') === 'T_WHITESPACE');

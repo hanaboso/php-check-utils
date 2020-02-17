@@ -3,6 +3,7 @@
 namespace Hanaboso\TestsPhpCheckUtils;
 
 use Exception;
+use Hanaboso\PhpCheckUtils\PhpUnit\Traits\CustomAssertTrait;
 use Hanaboso\PhpCheckUtils\PhpUnit\Traits\PrivateTrait;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\LocalFile;
@@ -18,6 +19,7 @@ abstract class KernelTestCaseAbstract extends TestCase
 {
 
     use PrivateTrait;
+    use CustomAssertTrait;
 
     /**
      * @var Runner

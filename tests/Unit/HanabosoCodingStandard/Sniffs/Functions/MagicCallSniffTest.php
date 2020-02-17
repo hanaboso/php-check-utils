@@ -34,6 +34,7 @@ final class MagicCallSniffTest extends KernelTestCaseAbstract
 
         // Positive
         $arr = [$this, 'compare'];
+        $arr = [[$this, 'compare']];
         usort($arr, [$this, 'compare']);
         usort($arr, [Config::class, 'printConfigData']);
         usort($arr, [MagicCallSniffTest::class, 'compare']);
@@ -77,17 +78,18 @@ final class MagicCallSniffTest extends KernelTestCaseAbstract
         ];
 
         $res = $this->processSniffTest(__DIR__ . '/MagicCallSniffTest.php', MagicCallSniff::class);
-        self::assertCount(8, $res->getErrors());
+        self::assertCount(9, $res->getErrors());
         self::assertEquals(
             [
                 36 => [17 => [$item]],
-                37 => [22 => [$item]],
+                37 => [18 => [$item]],
                 38 => [22 => [$item]],
                 39 => [22 => [$item]],
                 40 => [22 => [$item]],
-                43 => [14 => [$item]],
-                47 => [14 => [$item]],
-                51 => [14 => [$item]],
+                41 => [22 => [$item]],
+                44 => [14 => [$item]],
+                48 => [14 => [$item]],
+                52 => [14 => [$item]],
             ],
             $res->getErrors()
         );
