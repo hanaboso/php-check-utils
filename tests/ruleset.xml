@@ -64,6 +64,9 @@
         <!-- Exclude from version 6.1.0 -->
         <exclude name="SlevomatCodingStandard.Files.LineLength.LineTooLong"/>
         <exclude name="SlevomatCodingStandard.Commenting.RequireOneLineDocComment.MultiLineDocComment"/>
+        <!-- Exclude from version 6.2.0 -->
+        <exclude name="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
+        <exclude name="SlevomatCodingStandard.Classes.MethodSpacing"/>
     </rule>
 
     <!-- Slevomat coding standards -->
@@ -80,6 +83,11 @@
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <properties>
             <property name="spacesCountAroundEqualsSign" type="int" value="0"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration">
+        <properties>
+            <property name="spacesCountAfterKeyword" type="int" value="0"/>
         </properties>
     </rule>
 
