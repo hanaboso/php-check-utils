@@ -2,7 +2,7 @@
     "name": "hanaboso/php-check-utils",
     "description": "Utils for php development - CodeSniffer, PhpStan, PhpStorm",
     "license": "MIT",
-    "version": "1.1.21",
+    "version": "1.1.22",
     "authors": [
         {
             "name": "Hanaboso s.r.o.",
@@ -50,7 +50,6 @@
         "phpstan/phpstan-strict-rules": "^0.12",
         "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^8.5 | ^9.0",
-        "roave/security-advisories": "dev-master",
         "slevomat/coding-standard": "^6.2",
         "spaze/phpstan-disallowed-calls": "^0.12",
         "squizlabs/php_codesniffer": "^3.5",
