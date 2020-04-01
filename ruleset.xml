@@ -67,6 +67,7 @@
         <!-- Exclude from version 6.2.0 -->
         <exclude name="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
         <exclude name="SlevomatCodingStandard.Classes.MethodSpacing"/>
+        <exclude name="SlevomatCodingStandard.Commenting.DisallowCommentAfterCode"/>
     </rule>
 
     <!-- Slevomat coding standards -->
