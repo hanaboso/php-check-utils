@@ -44,13 +44,13 @@
         <exclude name="SlevomatCodingStandard.Operators.RequireOnlyStandaloneIncrementAndDecrementOperators"/>
         <!-- Exclude from version 4.8.1 -->
         <exclude name="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants"/>
-        <!-- Exclude from version 5.0.0 -->
+        <!-- Exclude from version 5.0 -->
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousTraitNaming"/>
         <exclude name="SlevomatCodingStandard.Functions.TrailingCommaInCall"/>
         <exclude name="SlevomatCodingStandard.Operators.DisallowEqualOperators"/>
         <exclude name="SlevomatCodingStandard.TypeHints.DisallowArrayTypeHintSyntax"/>
         <exclude name="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint"/>
-        <!-- Exclude from version 6.0.0 -->
+        <!-- Exclude from version 6.0 -->
         <exclude name="SlevomatCodingStandard.Commenting.UselessFunctionDocComment"/>
         <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint"/>
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
@@ -61,10 +61,10 @@
         <exclude name="SlevomatCodingStandard.PHP.DisallowReference"/>
         <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion"/>
         <exclude name="SlevomatCodingStandard.Numbers.DisallowNumericLiteralSeparator"/>
-        <!-- Exclude from version 6.1.0 -->
+        <!-- Exclude from version 6.1 -->
         <exclude name="SlevomatCodingStandard.Files.LineLength.LineTooLong"/>
         <exclude name="SlevomatCodingStandard.Commenting.RequireOneLineDocComment.MultiLineDocComment"/>
-        <!-- Exclude from version 6.2.0 -->
+        <!-- Exclude from version 6.2 -->
         <exclude name="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
         <exclude name="SlevomatCodingStandard.Classes.MethodSpacing"/>
         <exclude name="SlevomatCodingStandard.Commenting.DisallowCommentAfterCode"/>
