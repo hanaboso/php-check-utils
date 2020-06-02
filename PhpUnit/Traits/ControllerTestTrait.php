@@ -8,6 +8,7 @@ use Apitte\Core\Http\ApiResponse;
 use Closure;
 use Contributte\Psr7\Psr7Response;
 use Contributte\Psr7\Psr7ServerRequest;
+use JsonException;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
@@ -118,6 +119,8 @@ trait ControllerTestTrait
      * @param array        $requestBodyReplacements
      * @param array        $requestHeadersReplacements
      * @param Closure|NULL $bodyCallback
+     *
+     * @throws JsonException
      */
     protected function assertResponse(
         string $path,
@@ -165,6 +168,8 @@ trait ControllerTestTrait
      * @param array  $headers
      * @param array  $replaceRequest
      * @param array  $replaceResponse
+     *
+     * @throws JsonException
      */
     protected function assertGraphQlRequest(
         string $path,
@@ -216,6 +221,7 @@ trait ControllerTestTrait
      * @param array  $headers
      *
      * @return array
+     * @throws JsonException
      */
     protected function sendGraphQlRequest(string $request, string $uri, array $headers = []): array
     {
@@ -234,6 +240,7 @@ trait ControllerTestTrait
      * @param Closure|NULL $bodyCallback
      *
      * @return array
+     * @throws JsonException
      */
     protected function sendRequest(
         string $method,
@@ -288,6 +295,7 @@ trait ControllerTestTrait
      * @param array  $replacements
      *
      * @return array
+     * @throws JsonException
      */
     private function getControllerRequest(string $path, array $replacements = []): array
     {
@@ -322,6 +330,7 @@ trait ControllerTestTrait
      * @param string $path
      *
      * @return array
+     * @throws JsonException
      */
     private function getControllerResponse(string $path): array
     {
@@ -356,6 +365,7 @@ trait ControllerTestTrait
      * @param string $path
      *
      * @return array
+     * @throws JsonException
      */
     private function getContent(string $path): array
     {
@@ -388,6 +398,7 @@ trait ControllerTestTrait
      * @param string $path
      *
      * @return array
+     * @throws JsonException
      */
     private function getContentFromFile(string $path): array
     {
