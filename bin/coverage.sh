@@ -5,7 +5,8 @@ while [ "$#" -gt 0 ]; do case $1 in
   -p|--processes) processes="$2"; shift;;
   -t|--tests) tests="$2"; shift;;
   -w|--whitelist) whitelist="$2"; shift;;
-  *) echo -e "\033[1;31mUsage: coverage.sh -c <coverage> -p <processes> -t <tests> -w <whitelist>\033[0m"; exit 1;;
+  -e|--exclude-group) exclude="$2"; shift;;
+  *) echo -e "\033[1;31mUsage: coverage.sh -c <coverage> -p <processes> -t <tests> -w <whitelist> -e <exclude-group>\033[0m"; exit 1;;
 esac; shift; done
 
 if [ "$coverage" = '' ];
@@ -24,7 +25,11 @@ if [ "$whitelist" = '' ];
     then whitelist='src';
 fi
 
-time -f "Elapsed time: %e s." php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p $processes --coverage-text --whitelist $whitelist $tests | tee /tmp/phpunit-coverage.log
+if [ "$exclude" = '' ];
+    then exclude='unknown';
+fi
+
+time -f "Elapsed time: %e s." php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p $processes --coverage-text --whitelist $whitelist --exclude-group $exclude $tests | tee /tmp/phpunit-coverage.log
 DISTR=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release);
 
 if [ $DISTR = 'alpine' ];
