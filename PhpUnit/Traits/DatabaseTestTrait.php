@@ -28,9 +28,12 @@ trait DatabaseTestTrait
     protected EntityManager $em;
 
     /**
+     * @param array $alwaysClearTables
+     * @param array $neverClearTables
+     *
      * @throws Exception
      */
-    protected function clearMysql(): void
+    protected function clearMysql(array $alwaysClearTables = [], array $neverClearTables = []): void
     {
         $connection = $this->em->getConnection();
         $parameters = $this->getProperty($connection, 'params');
@@ -52,6 +55,8 @@ trait DatabaseTestTrait
             ),
             'TABLE_NAME'
         );
+        $tables = array_unique(array_merge($tables, $alwaysClearTables));
+        $tables = array_diff($tables, $neverClearTables);
 
         foreach ($connection->getSchemaManager()->listTables() as $table) {
             if (in_array($table->getName(), $tables, TRUE)) {
