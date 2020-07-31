@@ -30,6 +30,21 @@ parameters:
 		- '#T_DOC_COMMENT_WHITESPACE#'
 		- '#T_STRING_CONCAT#'
 		- '#T_OPEN_SHORT_ARRAY#'
+	ergebnis:
+		allowAbstractClasses: true
+		classesAllowedToBeExtended:
+			- HanabosoCodingStandard\Sniffs\Commenting\SniffAbstract
+		classesNotRequiredToBeAbstractOrFinal: []
+		interfacesImplementedByContainers:
+			- Psr\Container\ContainerInterface
+
+parametersSchema:
+	ergebnis: structure([
+		allowAbstractClasses: bool()
+		classesAllowedToBeExtended: listOf(string())
+		classesNotRequiredToBeAbstractOrFinal: listOf(string())
+		interfacesImplementedByContainers: listOf(string())
+	])
 
 services:
 	-
@@ -90,6 +105,33 @@ services:
 		tags:
 			- phpstan.rules.rule
 
+	-
+		class: Ergebnis\PHPStan\Rules\Classes\FinalRule
+		arguments:
+			allowAbstractClasses: %ergebnis.allowAbstractClasses%
+			classesNotRequiredToBeAbstractOrFinal: %ergebnis.classesNotRequiredToBeAbstractOrFinal%
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: Ergebnis\PHPStan\Rules\Classes\NoExtendsRule
+		arguments:
+			classesAllowedToBeExtended: %ergebnis.classesAllowedToBeExtended%
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: Ergebnis\PHPStan\Rules\Classes\PHPUnit\Framework\TestCaseWithSuffixRule
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: Ergebnis\PHPStan\Rules\Methods\NoParameterWithContainerTypeDeclarationRule
+		arguments:
+			interfacesImplementedByContainers: %ergebnis.interfacesImplementedByContainers%
+		tags:
+			- phpstan.rules.rule
+
 rules:
 	- PHPStan\Rules\Classes\RequireParentConstructCallRule
 	- PHPStan\Rules\DisallowedConstructs\DisallowedImplicitArrayCreationRule
@@ -112,3 +154,11 @@ rules:
 	- PHPStan\Rules\VariableVariables\VariableStaticMethodCallRule
 	- PHPStan\Rules\VariableVariables\VariableStaticPropertyFetchRule
 	- PHPStan\Rules\VariableVariables\VariableVariablesRule
+	- Ergebnis\PHPStan\Rules\Expressions\NoCompactRule
+	- Ergebnis\PHPStan\Rules\Expressions\NoEmptyRule
+	- Ergebnis\PHPStan\Rules\Expressions\NoErrorSuppressionRule
+	- Ergebnis\PHPStan\Rules\Expressions\NoEvalRule
+	- Ergebnis\PHPStan\Rules\Expressions\NoIssetRule
+	- Ergebnis\PHPStan\Rules\Files\DeclareStrictTypesRule
+	- Ergebnis\PHPStan\Rules\Methods\PrivateInFinalClassRule
+	- Ergebnis\PHPStan\Rules\Statements\NoSwitchRule

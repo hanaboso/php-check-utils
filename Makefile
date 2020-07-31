@@ -29,13 +29,13 @@ composer-outdated:
 
 # Tests
 phpcodesniffer:
-	$(DE) ./vendor/bin/phpcs --standard=./tests/ruleset.xml HanabosoCodingStandard PhpUnit
+	$(DE) ./vendor/bin/phpcs --parallel=$$(nproc) --standard=./tests/ruleset.xml HanabosoCodingStandard PhpUnit
 
 phpstan:
 	$(DE) ./vendor/bin/phpstan analyse -c ./tests/phpstan.neon -l 8 HanabosoCodingStandard PhpUnit
 
 phpunit:
-	$(DE) ./vendor/bin/paratest -c ./phpunit.xml.dist -p 4 tests/Unit
+	$(DE) ./vendor/bin/paratest -c ./phpunit.xml.dist -p $$(nproc) tests/Unit
 
 test: docker-up-force composer-install fasttest
 

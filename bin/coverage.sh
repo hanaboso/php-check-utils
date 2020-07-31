@@ -14,7 +14,7 @@ if [ "$coverage" = '' ];
 fi
 
 if [ "$processes" = '' ];
-    then processes=8;
+    then processes=$(nproc);
 fi
 
 if [ "$tests" = '' ];
