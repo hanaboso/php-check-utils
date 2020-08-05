@@ -34,9 +34,11 @@ parameters:
 		allowAbstractClasses: true
 		classesAllowedToBeExtended:
 			- HanabosoCodingStandard\Sniffs\Commenting\SniffAbstract
+			- Symfony\Component\HttpKernel\Kernel
+			- Symfony\Bundle\FrameworkBundle\Test\KernelTestCase
+			- Symfony\Bundle\FrameworkBundle\Test\WebTestCase
 		classesNotRequiredToBeAbstractOrFinal: []
-		interfacesImplementedByContainers:
-			- Psr\Container\ContainerInterface
+		interfacesImplementedByContainers: []
 
 parametersSchema:
 	ergebnis: structure([
