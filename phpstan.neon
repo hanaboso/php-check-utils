@@ -29,9 +29,21 @@ parameters:
 	ergebnis:
 		allowAbstractClasses: true
 		classesAllowedToBeExtended:
-			- Symfony\Component\HttpKernel\Kernel
+			- DemoTests\KernelTestCaseAbstract
+			- Doctrine\ODM\MongoDB\Repository\DocumentRepository
+			- Doctrine\ORM\EntityRepository
+			- Exception
+			- InfluxDB\Query\Builder
+			- League\OAuth2\Client\Provider\GenericProvider
+			- Symfony\Bundle\FrameworkBundle\Console\Application
+			- Symfony\Bundle\FrameworkBundle\Controller\AbstractController
 			- Symfony\Bundle\FrameworkBundle\Test\KernelTestCase
 			- Symfony\Bundle\FrameworkBundle\Test\WebTestCase
+			- Symfony\Component\Console\Command\Command
+			- Symfony\Component\HttpKernel\Bundle\Bundle
+			- Symfony\Component\HttpKernel\DependencyInjection\Extension
+			- Symfony\Component\HttpKernel\Kernel
+			- Symfony\Contracts\EventDispatcher\Event
 		classesNotRequiredToBeAbstractOrFinal: []
 		interfacesImplementedByContainers: []
 

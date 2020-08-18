@@ -46,4 +46,26 @@ final class ToArraySniffTest extends KernelTestCaseAbstract
         );
     }
 
+    /**
+     *
+     */
+    public function testToArrayFirstInterface(): void
+    {
+        $err = [
+            'message'  => ToArraySniff::ERROR_MESSAGE,
+            'source'   => 'HanabosoCodingStandard.Functions.ToArray.Comment',
+            'listener' => ToArraySniff::class,
+            'severity' => 5,
+            'fixable'  => FALSE,
+        ];
+        $res = $this->processSniffTest(__DIR__ . '/ToArrayInterface.php', ToArraySniff::class);
+        self::assertEquals(
+            [
+                16 => [
+                    12 => [$err],
+                ],
+            ],
+            $res->getErrors()
+        );
+    }
 }

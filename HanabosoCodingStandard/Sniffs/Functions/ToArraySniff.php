@@ -37,7 +37,7 @@ final class ToArraySniff implements Sniff
             return;
         }
 
-        $pos = (int) ($tokens[$position]['scope_closer'] + 1);
+        $pos = (int) (($tokens[$position]['scope_closer'] ?? $position) + 1);
 
         while ($pos < $file->numTokens) {
             $token = $tokens[$pos];
