@@ -49,6 +49,7 @@ parametersSchema:
 	])
 
 services:
+	- Spaze\PHPStan\Rules\Disallowed\DisallowedHelper
 	-
 		class: Spaze\PHPStan\Rules\Disallowed\FunctionCalls
 		tags:

@@ -29,9 +29,11 @@ parameters:
 	ergebnis:
 		allowAbstractClasses: true
 		classesAllowedToBeExtended:
-			- DemoTests\KernelTestCaseAbstract
+			- Doctrine\Bundle\FixturesBundle\Fixture
+			- Doctrine\ODM\MongoDB\Query\Filter\BsonFilter
 			- Doctrine\ODM\MongoDB\Repository\DocumentRepository
 			- Doctrine\ORM\EntityRepository
+			- Doctrine\ORM\Query\Filter\SQLFilter
 			- Exception
 			- InfluxDB\Query\Builder
 			- League\OAuth2\Client\Provider\GenericProvider
@@ -56,6 +58,7 @@ parametersSchema:
 	])
 
 services:
+	- Spaze\PHPStan\Rules\Disallowed\DisallowedHelper
 	-
 		class: Spaze\PHPStan\Rules\Disallowed\FunctionCalls
 		tags:
