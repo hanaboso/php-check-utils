@@ -6,6 +6,6 @@ services:
         environment:
             COMPOSER_HOME: ${HOME}/dev/.composer
         volumes:
-            - ./:/var/www
-            - ${SSH_AUTH_SOCK}:/tmp/bound-ssh-agent
-            - ${HOME}/dev/.composer:${HOME}/dev/.composer
+            - ./:/var/www:cached
+            - ${SSH_AUTH}:/tmp/.ssh-auth-sock
+            - ${HOME}/dev/.composer:${HOME}/dev/.composer:cached
