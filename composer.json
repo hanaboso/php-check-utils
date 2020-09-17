@@ -1,7 +1,7 @@
 {
     "name": "hanaboso/php-check-utils",
     "description": "Utils for php development - CodeSniffer, PhpStan, PhpUnit, PhpStorm",
-    "version": "1.1.36",
+    "version": "1.1.37",
     "license": "MIT",
     "authors": [
         {
@@ -23,7 +23,6 @@
     "require": {
         "php": ">=7.4",
         "ext-pcov": "*",
-        "apitte/core": "^0.6",
         "brianium/paratest": "^4.2 || ^5.0",
         "dg/bypass-finals": "^1.2",
         "doctrine/mongodb-odm": "^2.1",
@@ -33,7 +32,6 @@
         "php-mock/php-mock-phpunit": "^2.6",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine": "^0.12",
-        "phpstan/phpstan-nette": "^0.12",
         "phpstan/phpstan-phpunit": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
         "phpstan/phpstan-symfony": "^0.12",
@@ -48,6 +46,10 @@
     "require-dev": {
         "ext-json": "*",
         "ext-mongodb": "*"
+    },
+    "suggest": {
+        "apitte/core": "Install me, if you need to use ControllerTestTrait in Nette.",
+        "phpstan/phpstan-nette": "Install me, for enable PHPStan for Nette."
     },
     "autoload": {
         "psr-4": {

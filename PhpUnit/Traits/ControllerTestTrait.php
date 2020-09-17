@@ -252,6 +252,14 @@ trait ControllerTestTrait
     ): array
     {
         if (isset($this->dispatcher)) {
+            if (!class_exists('Apitte\\Core\\Dispatcher\\IDispatcher') ||
+                !class_exists('Apitte\\Core\\Http\\ApiRequest') ||
+                !class_exists('Apitte\\Core\\Http\\ApiResponse') ||
+                !class_exists('Contributte\\Psr7\\Psr7Response') ||
+                !class_exists('Contributte\\Psr7\\Psr7ServerRequest')) {
+                throw new LogicException('Package "apitte/core" does not exist. Please install it first.');
+            }
+
             $response = $this->dispatcher->dispatch(
                 new ApiRequest(
                     new Psr7ServerRequest(
