@@ -45,9 +45,9 @@ trait DatabaseTestTrait
             $this->setProperty($this->em, $name, $value);
         }
 
-        $connection->exec('SET FOREIGN_KEY_CHECKS = 0;');
+        $connection->executeStatement('SET FOREIGN_KEY_CHECKS = 0;');
         $tables = array_column(
-            $connection->fetchAll(
+            $connection->fetchAllAssociative(
                 sprintf(
                     "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%s' AND (AUTO_INCREMENT > 1 OR TABLE_ROWS > 0) AND TABLE_TYPE = 'BASE TABLE'",
                     $connection->getDatabase()
@@ -60,10 +60,10 @@ trait DatabaseTestTrait
 
         foreach ($connection->getSchemaManager()->listTables() as $table) {
             if (in_array($table->getName(), $tables, TRUE)) {
-                $this->em->getConnection()->exec(sprintf('TRUNCATE TABLE `%s`;', $table->getName()));
+                $this->em->getConnection()->executeStatement(sprintf('TRUNCATE TABLE `%s`;', $table->getName()));
             }
         }
-        $connection->exec('SET FOREIGN_KEY_CHECKS = 0;');
+        $connection->executeStatement('SET FOREIGN_KEY_CHECKS = 0;');
     }
 
     /**
@@ -71,6 +71,10 @@ trait DatabaseTestTrait
      */
     protected function clearMongo(): void
     {
+        if (!class_exists('Doctrine\\ODM\\MongoDB\\DocumentManager')) {
+            throw new LogicException('Package "doctrine/mongodb-odm" does not exist. Please install it first.');
+        }
+
         $this->dm->getConfiguration()->setDefaultDB($this->getDmDatabaseName());
         $this->dm->getSchemaManager()->dropDatabases();
         $this->dm->getSchemaManager()->createCollections();
@@ -95,6 +99,10 @@ trait DatabaseTestTrait
      */
     protected function pfd(object $document, bool $flush = TRUE): void
     {
+        if (!class_exists('Doctrine\\ODM\\MongoDB\\DocumentManager')) {
+            throw new LogicException('Package "doctrine/mongodb-odm" does not exist. Please install it first.');
+        }
+
         $this->pf($document, FALSE, $flush);
     }
 
