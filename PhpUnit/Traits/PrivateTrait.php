@@ -15,9 +15,9 @@ trait PrivateTrait
 {
 
     /**
-     * @param mixed  $object
-     * @param string $propertyName
-     * @param mixed  $value
+     * @param mixed $object
+     * @param mixed $propertyName
+     * @param mixed $value
      *
      * @throws ReflectionException
      */
