@@ -135,6 +135,9 @@ services:
 		tags:
 			- phpstan.rules.rule
 
+	errorFormatter.custom:
+		class: HanabosoCodingStandard\Reports\PhpStanReport
+
 rules:
 	- PHPStan\Rules\Classes\RequireParentConstructCallRule
 	- PHPStan\Rules\DisallowedConstructs\DisallowedImplicitArrayCreationRule

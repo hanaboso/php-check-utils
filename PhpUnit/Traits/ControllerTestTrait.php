@@ -12,6 +12,7 @@ use JsonException;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -139,7 +140,7 @@ trait ControllerTestTrait
 
         [$method, $url] = explode(' ', $http);
 
-        $response = $this->sendRequest(
+        $response    = $this->sendRequest(
             $method,
             $url,
             $this->replaceDynamicData($body, $requestBodyReplacements),
@@ -147,27 +148,37 @@ trait ControllerTestTrait
             [],
             $bodyCallback
         );
-        $http     = $response[self::$STATUS];
-        $body     = $this->replaceDynamicData($response[self::$BODY], $responseReplacements);
+        $http        = $response[self::$STATUS];
+        $body        = $this->replaceDynamicData($response[self::$BODY], $responseReplacements);
+        $headers     = $this->replaceDynamicData($response[self::$HEADERS], $responseReplacements);
+        $messageData = [self::$HTTP => $http, self::$BODY => $body];
+
+        if (array_key_exists(self::$HEADERS, $expectedResponse)) {
+            $messageData[self::$HEADERS] = $headers;
+        }
 
         $message = sprintf(
             'Response: %s%s%s%s',
             PHP_EOL,
             PHP_EOL,
-            json_encode([self::$HTTP => $http, self::$BODY => $body], JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
+            json_encode($messageData, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
             PHP_EOL
         );
 
         self::assertEquals($expectedResponse[self::$HTTP], $http, $message);
         self::assertEquals($expectedResponse[self::$BODY], $body, $message);
+        if (array_key_exists(self::$HEADERS, $expectedResponse)) {
+            $this->assertHeaders($expectedResponse[self::$HEADERS], $headers, $message);
+        }
     }
 
     /**
-     * @param string $path
-     * @param string $uri
-     * @param array  $headers
-     * @param array  $replaceRequest
-     * @param array  $replaceResponse
+     * @param string  $path
+     * @param string  $uri
+     * @param mixed[] $headers
+     * @param mixed[] $replaceRequest
+     * @param mixed[] $replaceResponse
+     * @param mixed[] $fragments
      *
      * @throws JsonException
      */
@@ -176,12 +187,18 @@ trait ControllerTestTrait
         string $uri,
         array $headers = [],
         array $replaceRequest = [],
-        array $replaceResponse = []
+        array $replaceResponse = [],
+        array $fragments = []
     ): void
     {
         $request = NULL;
+
         if (file_exists($path)) {
             $request = file_get_contents($path);
+        }
+
+        foreach ($fragments as $fragment) {
+            $request = sprintf('%s%s%s', file_get_contents($fragment), PHP_EOL, $request);
         }
 
         if ($replaceRequest) {
@@ -190,8 +207,7 @@ trait ControllerTestTrait
             }
         }
 
-        $response = $this->sendGraphQlRequest($request, $uri, $headers);
-        $content  = $this->getContentFromFile($path);
+        $response = $this->sendGraphQlRequest((string) $request, $uri, $headers);
 
         if ($replaceResponse) {
             array_walk_recursive(
@@ -204,23 +220,25 @@ trait ControllerTestTrait
             );
         }
 
-        $message = sprintf(
-            'Response: %s%s%s%s',
-            PHP_EOL,
-            PHP_EOL,
-            json_encode($response, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
-            PHP_EOL
+        self::assertEquals(
+            $this->getContentFromFile($path, $response),
+            $response,
+            sprintf(
+                'Response: %s%s%s%s',
+                PHP_EOL,
+                PHP_EOL,
+                json_encode($response, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
+                PHP_EOL
+            )
         );
-
-        self::assertEquals($content, $response, $message);
     }
 
     /**
-     * @param string $request
-     * @param string $uri
-     * @param array  $headers
+     * @param string  $request
+     * @param string  $uri
+     * @param mixed[] $headers
      *
-     * @return array
+     * @return mixed[]
      * @throws JsonException
      */
     protected function sendGraphQlRequest(string $request, string $uri, array $headers = []): array
@@ -228,7 +246,11 @@ trait ControllerTestTrait
         $this->client->request('POST', $uri, ['query' => $request], [], $headers);
         $response = $this->client->getResponse();
 
-        return json_decode($response->getContent(), TRUE, 512, JSON_THROW_ON_ERROR);
+        if (get_class($response) === JsonResponse::class) {
+            return json_decode($response->getContent() ?: '{}', TRUE, 512, JSON_THROW_ON_ERROR);
+        } else {
+            self::fail($response->getContent() ?: 'No Content');
+        }
     }
 
     /**
@@ -273,21 +295,23 @@ trait ControllerTestTrait
             );
 
             return [
-                self::$BODY   => $bodyCallback ? $bodyCallback($response) : $response->getJsonBody(),
-                self::$STATUS => $response->getStatusCode(),
+                self::$BODY    => $bodyCallback ? $bodyCallback($response) : $response->getJsonBody(),
+                self::$STATUS  => $response->getStatusCode(),
+                self::$HEADERS => $response->getHeaders(),
             ];
         } else if (isset($this->client)) {
             $this->client->request($method, $url, $body, $files, $headers, (string) json_encode($body));
             $response = $this->client->getResponse();
 
             return [
-                self::$BODY   => $bodyCallback ? $bodyCallback($response) : json_decode(
+                self::$BODY    => $bodyCallback ? $bodyCallback($response) : json_decode(
                     (string) $response->getContent(),
                     TRUE,
                     512,
                     JSON_THROW_ON_ERROR
                 ),
-                self::$STATUS => $response->getStatusCode(),
+                self::$STATUS  => $response->getStatusCode(),
+                self::$HEADERS => $response->headers->all(),
             ];
         } else {
             throw new LogicException('Dispatcher or client is not set');
@@ -403,31 +427,42 @@ trait ControllerTestTrait
     }
 
     /**
-     * @param string $path
+     * @param string  $path
+     * @param mixed[] $response
      *
-     * @return array
+     * @return mixed[]
      * @throws JsonException
      */
-    private function getContentFromFile(string $path): array
+    private function getContentFromFile(string $path, array $response): array
     {
         $path = str_replace('.graphql', '.json', $path);
 
         if (!is_file($path)) {
             file_put_contents(
                 $path,
-                json_encode(
-                    ['data' => []],
-                    JSON_FORCE_OBJECT | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR
-                ),
-                FILE_APPEND
+                sprintf('%s%s', json_encode($response, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR), PHP_EOL)
             );
 
             exec(sprintf('chown %s %s', getenv('DEV_UID'), $path));
             exec(sprintf('chgrp %s %s', getenv('DEV_GID'), $path));
-
         }
 
         return $this->getContent($path);
+    }
+
+    /**
+     * @param mixed[] $expectedHeaders
+     * @param mixed[] $headers
+     * @param string  $message
+     */
+    private function assertHeaders(array $expectedHeaders, array $headers, string $message): void
+    {
+        foreach ($expectedHeaders as $key => $expectedHeaderValue) {
+            if (!is_array($expectedHeaderValue) && is_array($headers[$key])) {
+                $expectedHeaderValue = [$expectedHeaderValue];
+            }
+            self::assertEquals($expectedHeaderValue, $headers[$key], $message);
+        }
     }
 
 }
