@@ -1,7 +1,7 @@
 {
     "name": "hanaboso/php-check-utils",
     "description": "Utils for php development - CodeSniffer, PhpStan, PhpUnit, PhpStorm",
-    "version": "1.1.41",
+    "version": "1.1.42",
     "license": "MIT",
     "authors": [
         {
@@ -21,10 +21,10 @@
         }
     ],
     "require": {
-        "php": ">=7.4 || >=8.0",
+        "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "ext-pcov": "*",
-        "brianium/paratest": "^v6.1",
+        "brianium/paratest": "^v6.2",
         "dg/bypass-finals": "^v1.3",
         "ergebnis/composer-normalize": "^2.13",
         "ergebnis/phpstan-rules": "^0.15",
@@ -36,27 +36,30 @@
         "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^9.5",
         "slevomat/coding-standard": "^6.4",
-        "spaze/phpstan-disallowed-calls": "^v1.1",
+        "spaze/phpstan-disallowed-calls": "^v1.4.0",
         "squizlabs/php_codesniffer": "^3.5",
         "symfony/browser-kit": "^v5.2",
         "symfony/framework-bundle": "^v5.2",
         "symfony/security-core": "^v5.2"
     },
     "require-dev": {
-        "doctrine/mongodb-odm": "^2.1",
+        "doctrine/mongodb-odm": "^2.2",
         "doctrine/orm": "^2.8",
+        "friendsoftwig/twigcs": "^v5.0",
         "phpstan/phpstan-nette": "^0.12"
     },
     "suggest": {
         "apitte/core": "Install me, if you need to use ControllerTestTrait in Nette.",
         "doctrine/mongodb-odm": "Install me, if you using MongoDB.",
         "doctrine/orm": "Install me, if you using MySQL.",
+        "friendsoftwig/twigcs": "Install me, if you want to check Twig CodeStyle.",
         "phpstan/phpstan-nette": "Install me, for enable PHPStan for Nette."
     },
     "autoload": {
         "psr-4": {
             "HanabosoCodingStandard\\": "HanabosoCodingStandard/",
-            "Hanaboso\\PhpCheckUtils\\PhpUnit\\": "PhpUnit/"
+            "Hanaboso\\PhpCheckUtils\\PhpUnit\\": "PhpUnit/",
+            "Hanaboso\\PhpCheckUtils\\TwigCs\\": "TwigCs/"
         }
     },
     "autoload-dev": {

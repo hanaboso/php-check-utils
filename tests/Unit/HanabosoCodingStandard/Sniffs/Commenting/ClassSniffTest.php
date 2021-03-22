@@ -13,7 +13,7 @@ final class ClassSniffTest extends KernelTestCaseAbstract
      */
     public function testRegister(): void
     {
-        self::assertEquals([364], (new ClassSniff())->register());
+        self::assertEquals([366], (new ClassSniff())->register());
     }
 
     /**

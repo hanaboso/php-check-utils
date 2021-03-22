@@ -26,16 +26,16 @@ final class MagicCallSniff implements Sniff
     }
 
     /**
-     * @param File $file
-     * @param int  $position
+     * @param File $phpcsFile
+     * @param int  $stackPtr
      */
-    public function process(File $file, $position): void
+    public function process(File $phpcsFile, $stackPtr): void
     {
-        $tokens = $file->getTokens();
-        $end    = $tokens[$position]['bracket_closer'];
+        $tokens = $phpcsFile->getTokens();
+        $end    = $tokens[$stackPtr]['bracket_closer'];
         $caller = NULL;
         $method = NULL;
-        $i      = ++$position;
+        $i      = ++$stackPtr;
         for (; $i < $end; $i++) {
             $type = $tokens[$i]['type'];
             // Skips nested arrays
@@ -46,11 +46,13 @@ final class MagicCallSniff implements Sniff
             }
             if ($type === 'T_VARIABLE' && $tokens[$i]['content'] == '$this') {
                 // Skip whitespaces to check that next token is a comma
-                while (($tokens[++$i]['type'] ?? '') === 'T_WHITESPACE');
+                while (($tokens[++$i]['type'] ?? '') === 'T_WHITESPACE') {
+                    // empty while
+                }
                 if ($tokens[$i]['type'] !== 'T_COMMA') {
                     return;
                 }
-                $caller = $this->getSelfFqn($file);
+                $caller = $this->getSelfFqn($phpcsFile);
 
                 break;
             }
@@ -59,7 +61,7 @@ final class MagicCallSniff implements Sniff
                 && $tokens[$i + 2]['content'] === 'class'
             ) {
                 // self::class
-                $caller = $this->getSelfFqn($file);
+                $caller = $this->getSelfFqn($phpcsFile);
 
                 break;
             }
@@ -68,10 +70,10 @@ final class MagicCallSniff implements Sniff
                 && $tokens[$i + 2]['content'] === 'class'
             ) {
                 $className = $tokens[$i]['content'];
-                if ($className === $this->getSelfClassname($file)) {
-                    $caller = $this->getSelfFqn($file);
+                if ($className === $this->getSelfClassname($phpcsFile)) {
+                    $caller = $this->getSelfFqn($phpcsFile);
                 } else {
-                    $caller = $this->findInUsages($file, $className);
+                    $caller = $this->findInUsages($phpcsFile, $className);
                 }
 
                 break;
@@ -84,13 +86,13 @@ final class MagicCallSniff implements Sniff
             }
             if ($type === 'T_NS_SEPARATOR') {
                 // Fully Qualified Classname
-                $caller = $this->getFqn($file, $position);
+                $caller = $this->getFqn($phpcsFile, $stackPtr);
 
                 break;
             }
         }
 
-        $methodPos = $file->findPrevious(T_CONSTANT_ENCAPSED_STRING, $end);
+        $methodPos = $phpcsFile->findPrevious(T_CONSTANT_ENCAPSED_STRING, $end);
         if ($methodPos <= $i) {
             return;
         }
@@ -110,7 +112,7 @@ final class MagicCallSniff implements Sniff
         /** @phpstan-var class-string $methodName */
         $methodName = trim($method, '\'');
         if ($class->hasMethod($methodName)) {
-            $file->addError(self::ERROR_MESSAGE, $position, 'Comment');
+            $phpcsFile->addError(self::ERROR_MESSAGE, $stackPtr, 'Comment');
         }
     }
 

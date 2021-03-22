@@ -27,15 +27,15 @@ final class ConcatenationStringSniff implements Sniff
     }
 
     /**
-     * @param File $file
-     * @param int  $position
+     * @param File  $phpcsFile
+     * @param mixed $stackPtr
      */
-    public function process(File $file, $position): void
+    public function process(File $phpcsFile, $stackPtr): void
     {
-        if (!in_array($file->getTokens()[$position - 2]['content'], $this->allowedConstants, TRUE)) {
-            $file->addError(
+        if (!in_array($phpcsFile->getTokens()[$stackPtr - 2]['content'], $this->allowedConstants, TRUE)) {
+            $phpcsFile->addError(
                 'Use sprintf() instead of concatenation with "."',
-                $position,
+                $stackPtr,
                 'HanabosoCodingStandard.Strings.ConcatenationString'
             );
         }

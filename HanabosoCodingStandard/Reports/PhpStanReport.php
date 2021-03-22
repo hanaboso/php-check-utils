@@ -30,13 +30,13 @@ final class PhpStanReport implements ErrorFormatter
 
     /**
      * @param AnalysisResult $analysisResult
-     * @param Output         $style
+     * @param Output         $output
      *
      * @return int
      */
-    public function formatErrors(AnalysisResult $analysisResult, Output $style): int
+    public function formatErrors(AnalysisResult $analysisResult, Output $output): int
     {
-        $style = $style->getStyle();
+        $style = $output->getStyle();
 
         /** @var Error[][] $fileErrors */
         $fileErrors = [];

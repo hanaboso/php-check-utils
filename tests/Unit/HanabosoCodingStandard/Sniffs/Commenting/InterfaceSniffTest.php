@@ -18,7 +18,7 @@ final class InterfaceSniffTest extends KernelTestCaseAbstract implements NullInt
      */
     public function testRegister(): void
     {
-        self::assertEquals([366], (new InterfaceSniff())->register());
+        self::assertEquals([368], (new InterfaceSniff())->register());
     }
 
     /**

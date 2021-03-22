@@ -21,12 +21,12 @@ final class TraitSniff extends SniffAbstract
     }
 
     /**
-     * @param File  $file
-     * @param mixed $position
+     * @param File  $phpcsFile
+     * @param mixed $stackPtr
      */
-    public function process(File $file, $position): void
+    public function process(File $phpcsFile, $stackPtr): void
     {
-        $this->processCommenting($file, $position, self::TYPE_TRAIT);
+        $this->processCommenting($phpcsFile, $stackPtr, self::TYPE_TRAIT);
     }
 
 }

@@ -26,20 +26,20 @@ final class ToArraySniff implements Sniff
     }
 
     /**
-     * @param File $file
-     * @param int  $position
+     * @param File  $phpcsFile
+     * @param mixed $stackPtr
      */
-    public function process(File $file, $position): void
+    public function process(File $phpcsFile, $stackPtr): void
     {
-        $tokens = $file->getTokens();
+        $tokens = $phpcsFile->getTokens();
 
-        if (!$this->isToArray($tokens, $position)) {
+        if (!$this->isToArray($tokens, $stackPtr)) {
             return;
         }
 
-        $pos = (int) (($tokens[$position]['scope_closer'] ?? $position) + 1);
+        $pos = (int) (($tokens[$stackPtr]['scope_closer'] ?? $stackPtr) + 1);
 
-        while ($pos < $file->numTokens) {
+        while ($pos < $phpcsFile->numTokens) {
             $token = $tokens[$pos];
             $code  = $token['code'];
             // Class and other possible scope ends
@@ -49,7 +49,7 @@ final class ToArraySniff implements Sniff
 
             if ($code === T_FUNCTION) {
                 if ($this->isPublicNonStatic($tokens, $pos)) {
-                    $file->addError(self::ERROR_MESSAGE, $position, 'Comment');
+                    $phpcsFile->addError(self::ERROR_MESSAGE, $stackPtr, 'Comment');
                 }
             }
 
