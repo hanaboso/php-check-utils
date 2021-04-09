@@ -46,7 +46,6 @@
         <exclude name="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants"/>
         <!-- Exclude from version 5.0 -->
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousTraitNaming"/>
-        <exclude name="SlevomatCodingStandard.Functions.TrailingCommaInCall"/>
         <exclude name="SlevomatCodingStandard.Operators.DisallowEqualOperators"/>
         <exclude name="SlevomatCodingStandard.TypeHints.DisallowArrayTypeHintSyntax"/>
         <exclude name="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint"/>
@@ -68,6 +67,16 @@
         <exclude name="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
         <exclude name="SlevomatCodingStandard.Classes.MethodSpacing"/>
         <exclude name="SlevomatCodingStandard.Commenting.DisallowCommentAfterCode"/>
+        <!-- Exclude from version 7.0 -->
+        <exclude name="SlevomatCodingStandard.Classes.DisallowConstructorPropertyPromotion.DisallowedConstructorPropertyPromotion"/>
+        <exclude name="SlevomatCodingStandard.Functions.DisallowEmptyFunction.EmptyFunction"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.IncorrectWhitespaceBeforeDeclare"/>
+        <exclude name="SlevomatCodingStandard.Functions.DisallowNamedArguments.DisallowedNamedArgument"/>
+        <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration.MissingTrailingComma"/>
+        <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma"/>
+        <exclude name="SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter"/>
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+        <exclude name="SlevomatCodingStandard.Files.FunctionLength"/>
     </rule>
 
     <!-- Slevomat coding standards -->

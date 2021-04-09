@@ -18,8 +18,6 @@ trait PrivateTrait
      * @param mixed $object
      * @param mixed $propertyName
      * @param mixed $value
-     *
-     * @throws ReflectionException
      */
     protected function setProperty($object, $propertyName, $value): void
     {
@@ -45,9 +43,8 @@ trait PrivateTrait
      * @param string $propertyName
      *
      * @return mixed
-     * @throws ReflectionException
      */
-    protected function getProperty(object $object, string $propertyName)
+    protected function getProperty(object $object, string $propertyName): mixed
     {
         $reflection = new ReflectionObject($object);
 
@@ -73,7 +70,7 @@ trait PrivateTrait
      */
     protected function getPropertyByInstance(object $object, string $instance): array
     {
-        if (get_class($object) === $instance) {
+        if ($object::class === $instance) {
             return [NULL, $object];
         }
 
@@ -99,7 +96,7 @@ trait PrivateTrait
      * @return mixed
      * @throws ReflectionException
      */
-    protected function invokeMethod(object $object, string $methodName, array $parameters = [])
+    protected function invokeMethod(object $object, string $methodName, array $parameters = []): mixed
     {
         $reflection = new ReflectionObject($object);
 

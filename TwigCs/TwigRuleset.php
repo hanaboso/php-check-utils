@@ -22,18 +22,12 @@ class TwigRuleset implements RulesetInterface
 {
 
     /**
-     * @var int
-     */
-    protected int $twigMajorVersion;
-
-    /**
      * TwigRuleset constructor.
      *
      * @param int $twigMajorVersion
      */
-    public function __construct(int $twigMajorVersion)
+    public function __construct(protected int $twigMajorVersion)
     {
-        $this->twigMajorVersion = $twigMajorVersion;
     }
 
     /**

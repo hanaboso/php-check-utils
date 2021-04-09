@@ -105,8 +105,7 @@ final class MagicCallSniff implements Sniff
             /** @phpstan-var class-string $callerTrimmed */
             $callerTrimmed = trim($caller, '\'');
             $class         = new ReflectionClass($callerTrimmed);
-        } catch (Throwable $t) {
-            // Not a class
+        } catch (Throwable) {
             return;
         }
         /** @phpstan-var class-string $methodName */

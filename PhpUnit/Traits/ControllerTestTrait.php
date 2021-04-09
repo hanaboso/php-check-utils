@@ -246,7 +246,7 @@ trait ControllerTestTrait
         $this->client->request('POST', $uri, ['query' => $request], [], $headers);
         $response = $this->client->getResponse();
 
-        if (get_class($response) === JsonResponse::class) {
+        if ($response::class === JsonResponse::class) {
             return json_decode($response->getContent() ?: '{}', TRUE, 512, JSON_THROW_ON_ERROR);
         } else {
             self::fail($response->getContent() ?: 'No Content');

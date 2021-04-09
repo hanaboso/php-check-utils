@@ -31,7 +31,7 @@ abstract class SniffAbstract implements Sniff
     /**
      * @var string[]
      */
-    public array $comments = [
+    protected array $comments = [
         '{TYPE} {NAME}',
         '@package {NAMESPACE}',
     ];
