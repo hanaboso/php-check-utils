@@ -13,7 +13,7 @@ script:
     - ./vendor/bin/paratest -c ./phpunit.xml.dist -p 4 tests/Unit
 
 php:
-    - 7.4
+    - 8.0
 
 branches:
     only:

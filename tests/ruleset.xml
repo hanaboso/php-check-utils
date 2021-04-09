@@ -70,13 +70,15 @@
         <!-- Exclude from version 7.0 -->
         <exclude name="SlevomatCodingStandard.Classes.DisallowConstructorPropertyPromotion.DisallowedConstructorPropertyPromotion"/>
         <exclude name="SlevomatCodingStandard.Functions.DisallowEmptyFunction.EmptyFunction"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.DisallowNullSafeObjectOperator.DisallowedNullSafeObjectOperator"/>
         <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.IncorrectWhitespaceBeforeDeclare"/>
         <exclude name="SlevomatCodingStandard.Functions.DisallowNamedArguments.DisallowedNamedArgument"/>
         <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration.MissingTrailingComma"/>
         <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma"/>
         <exclude name="SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter"/>
-        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
         <exclude name="SlevomatCodingStandard.Files.FunctionLength"/>
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+        <exclude name="Squiz.Commenting.FunctionComment.Missing"/>
     </rule>
 
     <!-- Slevomat coding standards -->
