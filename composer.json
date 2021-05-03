@@ -1,7 +1,7 @@
 {
     "name": "hanaboso/php-check-utils",
     "description": "Utils for php development - CodeSniffer, PhpStan, PhpUnit, PhpStorm",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "license": "MIT",
     "authors": [
         {
@@ -24,7 +24,7 @@
         "php": "^8.0",
         "ext-json": "*",
         "ext-pcov": "*",
-        "brianium/paratest": "^v6.2",
+        "brianium/paratest": "^v6.3",
         "dg/bypass-finals": "^v1.3",
         "ergebnis/composer-normalize": "^2.13",
         "ergebnis/phpstan-rules": "^0.15",

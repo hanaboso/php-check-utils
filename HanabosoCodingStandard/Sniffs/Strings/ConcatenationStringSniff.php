@@ -36,7 +36,7 @@ final class ConcatenationStringSniff implements Sniff
             $phpcsFile->addError(
                 'Use sprintf() instead of concatenation with "."',
                 $stackPtr,
-                'HanabosoCodingStandard.Strings.ConcatenationString'
+                'HanabosoCodingStandard.Strings.ConcatenationString',
             );
         }
     }

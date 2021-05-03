@@ -54,7 +54,7 @@ final class ConstructorSniff extends SniffAbstract
                             $phpcsFile,
                             $stackPtr,
                             self::TYPE_CONSTRUCTOR,
-                            $tokens[$innerPosition][self::CONTENT]
+                            $tokens[$innerPosition][self::CONTENT],
                         );
                     }
                 }

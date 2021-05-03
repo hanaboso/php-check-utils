@@ -50,10 +50,10 @@ trait DatabaseTestTrait
             $connection->fetchAllAssociative(
                 sprintf(
                     "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '%s' AND (AUTO_INCREMENT > 1 OR TABLE_ROWS > 0) AND TABLE_TYPE = 'BASE TABLE'",
-                    $connection->getDatabase()
-                )
+                    $connection->getDatabase(),
+                ),
             ),
-            'TABLE_NAME'
+            'TABLE_NAME',
         );
         $tables = array_unique(array_merge($tables, $alwaysClearTables));
         $tables = array_diff($tables, $neverClearTables);

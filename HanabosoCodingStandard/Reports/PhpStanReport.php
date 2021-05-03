@@ -55,7 +55,7 @@ final class PhpStanReport implements ErrorFormatter
                     '%s:%s: %s',
                     str_replace($this->root, '', $file),
                     $error->getLine() ?? '1',
-                    $error->getMessage()
+                    $error->getMessage(),
                 );
                 $style->newLine();
             }

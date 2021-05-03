@@ -78,7 +78,7 @@ trait ControllerTestTrait
     {
         $this->client = self::createClient(
             array_merge(['environment' => 'test', 'debug' => TRUE], $options),
-            $server
+            $server,
         );
     }
 
@@ -94,7 +94,7 @@ trait ControllerTestTrait
         string $password,
         string $tokenClass = UsernamePasswordToken::class,
         string $secureKey = '_security_',
-        string $secureArea = 'secured_area'
+        string $secureArea = 'secured_area',
     ): void
     {
         $this->session      = self::$container->get('session');
@@ -129,7 +129,7 @@ trait ControllerTestTrait
         array $requestHttpReplacements = [],
         array $requestBodyReplacements = [],
         array $requestHeadersReplacements = [],
-        ?Closure $bodyCallback = NULL
+        ?Closure $bodyCallback = NULL,
     ): void
     {
         $expectedResponse = $this->getControllerResponse($path);
@@ -146,7 +146,7 @@ trait ControllerTestTrait
             $this->replaceDynamicData($body, $requestBodyReplacements),
             $this->replaceDynamicData($headers, $requestHeadersReplacements),
             [],
-            $bodyCallback
+            $bodyCallback,
         );
         $http        = $response[self::$STATUS];
         $body        = $this->replaceDynamicData($response[self::$BODY], $responseReplacements);
@@ -162,7 +162,7 @@ trait ControllerTestTrait
             PHP_EOL,
             PHP_EOL,
             json_encode($messageData, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
-            PHP_EOL
+            PHP_EOL,
         );
 
         self::assertEquals($expectedResponse[self::$HTTP], $http, $message);
@@ -188,7 +188,7 @@ trait ControllerTestTrait
         array $headers = [],
         array $replaceRequest = [],
         array $replaceResponse = [],
-        array $fragments = []
+        array $fragments = [],
     ): void
     {
         $request = NULL;
@@ -216,7 +216,7 @@ trait ControllerTestTrait
                     if (isset($replaceResponse[$key])) {
                         $value = $replaceResponse[$key];
                     }
-                }
+                },
             );
         }
 
@@ -228,8 +228,8 @@ trait ControllerTestTrait
                 PHP_EOL,
                 PHP_EOL,
                 json_encode($response, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
-                PHP_EOL
-            )
+                PHP_EOL,
+            ),
         );
     }
 
@@ -270,7 +270,7 @@ trait ControllerTestTrait
         array $body = [],
         array $headers = [],
         array $files = [],
-        ?Closure $bodyCallback = NULL
+        ?Closure $bodyCallback = NULL,
     ): array
     {
         if (isset($this->dispatcher)) {
@@ -288,10 +288,10 @@ trait ControllerTestTrait
                         $method,
                         $url,
                         $headers,
-                        json_encode($body, JSON_THROW_ON_ERROR)
-                    )
+                        json_encode($body, JSON_THROW_ON_ERROR),
+                    ),
                 ),
-                new ApiResponse(new Psr7Response())
+                new ApiResponse(new Psr7Response()),
             );
 
             return [
@@ -308,7 +308,7 @@ trait ControllerTestTrait
                     (string) $response->getContent(),
                     TRUE,
                     512,
-                    JSON_THROW_ON_ERROR
+                    JSON_THROW_ON_ERROR,
                 ),
                 self::$STATUS  => $response->getStatusCode(),
                 self::$HEADERS => $response->headers->all(),
@@ -347,7 +347,7 @@ trait ControllerTestTrait
             $content[self::$HTTP] = str_replace(
                 array_keys($replacements),
                 array_values($replacements),
-                $content[self::$HTTP]
+                $content[self::$HTTP],
             );
         }
 
@@ -373,9 +373,9 @@ trait ControllerTestTrait
                 $path,
                 json_encode(
                     [self::$HTTP => ApiResponse::S200_OK, self::$BODY => []],
-                    JSON_FORCE_OBJECT | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR
+                    JSON_FORCE_OBJECT | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR,
                 ),
-                FILE_APPEND
+                FILE_APPEND,
             );
 
             exec(sprintf('chown %s %s', getenv('DEV_UID'), $path));
@@ -419,7 +419,7 @@ trait ControllerTestTrait
                     if (isset($replacements[$key])) {
                         $value = $replacements[$key];
                     }
-                }
+                },
             );
         }
 
@@ -440,7 +440,7 @@ trait ControllerTestTrait
         if (!is_file($path)) {
             file_put_contents(
                 $path,
-                sprintf('%s%s', json_encode($response, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR), PHP_EOL)
+                sprintf('%s%s', json_encode($response, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR), PHP_EOL),
             );
 
             exec(sprintf('chown %s %s', getenv('DEV_UID'), $path));

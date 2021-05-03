@@ -102,7 +102,7 @@ abstract class SniffAbstract implements Sniff
 
         return array_filter(
             array_map('trim', $result),
-            static fn(string $item): bool => strlen($item) > 0
+            static fn(string $item): bool => strlen($item) > 0,
         );
     }
 
@@ -126,7 +126,7 @@ abstract class SniffAbstract implements Sniff
                     $file->addError(
                         sprintf("Usage of %s comment without '%s' is not allowed.", lcfirst($type), $comment),
                         $position,
-                        'Comment'
+                        'Comment',
                     );
                 }
             }
@@ -147,7 +147,7 @@ abstract class SniffAbstract implements Sniff
         int $position,
         string $type,
         string $string,
-        ?string $customName = NULL
+        ?string $customName = NULL,
     ): string
     {
         return str_replace(
@@ -157,7 +157,7 @@ abstract class SniffAbstract implements Sniff
                 $customName ?: $file->getTokens()[$position][self::CONTENT],
                 $type,
             ],
-            $string
+            $string,
         );
     }
 

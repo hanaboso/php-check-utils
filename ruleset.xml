@@ -73,12 +73,10 @@
         <exclude name="SlevomatCodingStandard.ControlStructures.DisallowNullSafeObjectOperator.DisallowedNullSafeObjectOperator"/>
         <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.IncorrectWhitespaceBeforeDeclare"/>
         <exclude name="SlevomatCodingStandard.Functions.DisallowNamedArguments.DisallowedNamedArgument"/>
-        <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration.MissingTrailingComma"/>
-        <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma"/>
-        <exclude name="SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter"/>
+        <exclude name="SlevomatCodingStandard.Functions.DisallowTrailingCommaInDeclaration"/>
+        <exclude name="SlevomatCodingStandard.Functions.DisallowTrailingCommaInCall"/>
         <exclude name="SlevomatCodingStandard.Files.FunctionLength"/>
-        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
-        <exclude name="Squiz.Commenting.FunctionComment.Missing"/>
+        <exclude name="SlevomatCodingStandard.Functions.FunctionLength"/>
     </rule>
 
     <!-- Slevomat coding standards -->
@@ -140,7 +138,6 @@
 
     <!-- PSR coding standards -->
     <rule ref='PSR1'/>
-
     <rule ref="PSR2.ControlStructures.ControlStructureSpacing"/>
     <rule ref="PSR2.Files.ClosingTag"/>
     <rule ref="PSR2.Files.EndFileNewline"/>
@@ -159,7 +156,6 @@
             <property name="indent" value="4"/>
         </properties>
     </rule>
-
     <rule ref="Generic.Formatting.MultipleStatementAlignment">
         <properties>
             <property name="error" value="true" />
