@@ -11,11 +11,7 @@ use Contributte\Psr7\Psr7ServerRequest;
 use JsonException;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Trait ControllerTestTrait
@@ -34,16 +30,6 @@ trait ControllerTestTrait
      * @var IDispatcher
      */
     protected IDispatcher $dispatcher;
-
-    /**
-     * @var Session
-     */
-    protected Session $session;
-
-    /**
-     * @var UsageTrackingTokenStorage
-     */
-    protected UsageTrackingTokenStorage $tokenStorage;
 
     /**
      * @var string
@@ -80,37 +66,6 @@ trait ControllerTestTrait
             array_merge(['environment' => 'test', 'debug' => TRUE], $options),
             $server,
         );
-    }
-
-    /**
-     * @param object $user
-     * @param string $password
-     * @param string $tokenClass
-     * @param string $secureKey
-     * @param string $secureArea
-     */
-    protected function setClientCookies(
-        object $user,
-        string $password,
-        string $tokenClass = UsernamePasswordToken::class,
-        string $secureKey = '_security_',
-        string $secureArea = 'secured_area',
-    ): void
-    {
-        $this->session      = self::$container->get('session');
-        $this->tokenStorage = self::$container->get('security.token_storage');
-
-        $this->session->invalidate();
-        $this->session->start();
-
-        $token = new $tokenClass($user, $password, $secureArea, ['admin']);
-        $this->tokenStorage->setToken($token);
-
-        $this->session->set(sprintf('%s%s', $secureKey, $secureArea), serialize($token));
-        $this->session->save();
-
-        $cookie = new Cookie($this->session->getName(), $this->session->getId());
-        $this->client->getCookieJar()->set($cookie);
     }
 
     /**
