@@ -327,7 +327,7 @@ trait ControllerTestTrait
             file_put_contents(
                 $path,
                 json_encode(
-                    [self::$HTTP => ApiResponse::S200_OK, self::$BODY => []],
+                    [self::$HTTP => 200, self::$BODY => []],
                     JSON_FORCE_OBJECT | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR,
                 ),
                 FILE_APPEND,
