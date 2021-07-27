@@ -7,6 +7,9 @@ includes:
 	- ./../../phpstan/phpstan-symfony/rules.neon
 	- ./../../phpstan/phpstan-phpunit/rules.neon
 	- ./../../phpstan/phpstan-doctrine/rules.neon
+	- ./../../spaze/phpstan-disallowed-calls/extension.neon
+	- ./../../spaze/phpstan-disallowed-calls/disallowed-dangerous-calls.neon
+	- ./../../spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon
 
 parameters:
 	polluteScopeWithLoopInitialAssignments: false
@@ -51,6 +54,27 @@ parameters:
 		classesNotRequiredToBeAbstractOrFinal: []
 		interfacesImplementedByContainers: []
 
+	disallowedStaticCalls:
+		-
+			method: 'Nette\Utils\Json::decode()'
+			message: 'use Hanaboso\Utils\String\Json::decode() instead'
+		-
+			method: 'Nette\Utils\Json::encode()'
+			message: 'use Hanaboso\Utils\String\Json::encode() instead'
+	disallowedFunctionCalls:
+		-
+			function: 'file_put_contents()'
+			message: 'use Hanaboso\Utils\File\Files::putContent() or logger instead'
+		-
+			function: 'file_get_contents()'
+			message: 'use Hanaboso\Utils\File\Files::getContent() instead'
+		-
+			function: 'json_decode()'
+			message: 'use Hanaboso\Utils\String\Json::decode() instead'
+		-
+			function: 'json_encode()'
+			message: 'use Hanaboso\Utils\String\Json::encode() instead'
+
 parametersSchema:
 	ergebnis: structure([
 		allowAbstractClasses: bool()
@@ -60,50 +84,6 @@ parametersSchema:
 	])
 
 services:
-	- Spaze\PHPStan\Rules\Disallowed\DisallowedHelper
-	- Spaze\PHPStan\Rules\Disallowed\FileHelper
-	-
-		class: Spaze\PHPStan\Rules\Disallowed\FunctionCalls
-		tags:
-			- phpstan.rules.rule
-		arguments:
-			forbiddenCalls:
-				-
-					function: 'var_dump()'
-					message: 'use logger instead'
-				-
-					function: 'var_export()'
-					message: 'use logger instead'
-				-
-					function: 'print_r()'
-					message: 'use logger instead'
-				-
-					function: 'file_put_content()'
-					message: 'use Hanaboso\Utils\File\Files::putContent() or logger instead'
-				-
-					function: 'file_get_content()'
-					message: 'use Hanaboso\Utils\File\Files::getContent() instead'
-				-
-					function: 'json_decode()'
-					message: 'use Hanaboso\Utils\String\Json::decode() instead'
-				-
-					function: 'json_encode()'
-					message: 'use Hanaboso\Utils\String\Json::encode() instead'
-
-	-
-		class: Spaze\PHPStan\Rules\Disallowed\StaticCalls
-		tags:
-			- phpstan.rules.rule
-		arguments:
-			forbiddenCalls:
-				-
-					method: 'Nette\Utils\Json::decode()'
-					message: 'use Hanaboso\Utils\String\Json::decode() instead'
-				-
-					method: 'Nette\Utils\Json::encode()'
-					message: 'use Hanaboso\Utils\String\Json::encode() instead'
-
-
 	-
 		class: PHPStan\Rules\Operators\OperatorRuleHelper
 	-
