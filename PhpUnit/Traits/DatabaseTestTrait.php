@@ -77,7 +77,6 @@ trait DatabaseTestTrait
 
         $this->dm->getConfiguration()->setDefaultDB($this->getDmDatabaseName());
         $this->dm->getSchemaManager()->dropDatabases();
-        $this->dm->getSchemaManager()->createCollections();
     }
 
     /**

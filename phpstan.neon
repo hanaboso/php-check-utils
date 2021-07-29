@@ -64,10 +64,10 @@ parameters:
 	disallowedFunctionCalls:
 		-
 			function: 'file_put_contents()'
-			message: 'use Hanaboso\Utils\File\Files::putContent() or logger instead'
+			message: 'use Hanaboso\Utils\File\File::putContent() or logger instead'
 		-
 			function: 'file_get_contents()'
-			message: 'use Hanaboso\Utils\File\Files::getContent() instead'
+			message: 'use Hanaboso\Utils\File\File::getContent() instead'
 		-
 			function: 'json_decode()'
 			message: 'use Hanaboso\Utils\String\Json::decode() instead'
