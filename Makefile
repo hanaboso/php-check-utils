@@ -36,7 +36,7 @@ phpstan:
 	$(DE) ./vendor/bin/phpstan analyse -c ./tests/phpstan.neon -l 8 HanabosoCodingStandard PhpUnit TwigCs
 
 phpunit:
-	$(DE) ./vendor/bin/paratest -c ./phpunit.xml.dist -p $$(nproc) tests/Unit
+	$(DE) ./vendor/bin/paratest -c ./tests/phpunit.xml.dist -p $$(nproc) tests/Unit
 
 test: docker-up-force composer-install fasttest
 
