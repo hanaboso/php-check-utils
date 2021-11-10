@@ -101,7 +101,7 @@ abstract class SniffAbstract implements Sniff
         }
 
         return array_filter(
-            array_map('trim', $result),
+            array_map(static fn($item) => trim($item ?? ''), $result),
             static fn(string $item): bool => strlen($item) > 0,
         );
     }

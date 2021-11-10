@@ -19,7 +19,6 @@ parameters:
 	checkAlwaysTrueStrictComparison: true
 	checkExplicitMixedMissingReturn: true
 	checkFunctionNameCase: true
-	checkMissingClosureNativeReturnTypehintRule: true
 	reportMaybesInMethodSignatures: true
 	reportStaticMethodSignatures: true
 	reportUnmatchedIgnoredErrors: false
