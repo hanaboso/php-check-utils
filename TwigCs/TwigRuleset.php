@@ -18,7 +18,7 @@ use FriendsOfTwig\Twigcs\Validator\Violation;
  *
  * @package Hanaboso\PhpCheckUtils\TwigCs
  */
-class TwigRuleset implements RulesetInterface
+final class TwigRuleset implements RulesetInterface
 {
 
     /**

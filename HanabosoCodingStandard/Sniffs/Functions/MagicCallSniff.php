@@ -34,7 +34,6 @@ final class MagicCallSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
         $end    = $tokens[$stackPtr]['bracket_closer'];
         $caller = NULL;
-        $method = NULL;
         $i      = ++$stackPtr;
         for (; $i < $end; $i++) {
             $type = $tokens[$i]['type'];
