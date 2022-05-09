@@ -29,7 +29,9 @@ parameters:
 		- '#Call to an undefined method Doctrine\\ODM\\MongoDB\\DocumentRepository::*.#' # remove after better doctrine support
 		- '#Return type of call to method PHPUnit\\Framework\\TestCase\:\:createMock\(\) contains unresolvable type.#'
 		- '#Return type of call to method PHPUnit\\Framework\\TestCase\:\:createPartialMock\(\) contains unresolvable type.#'
+		- '#Return type of call to method PHPUnit\\Framework\\MockObject\\MockBuilder<.*>\:\:getMock\(\) contains unresolvable type.#'
 		- '#Property .* is never written, only read#'
+		- '#Service .* is private#'
 	ergebnis:
 		allowAbstractClasses: true
 		classesAllowedToBeExtended:
