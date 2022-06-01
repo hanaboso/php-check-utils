@@ -79,6 +79,7 @@
         <exclude name="SlevomatCodingStandard.Functions.FunctionLength"/>
         <!-- Exclude from version 7.1 -->
         <exclude name="SlevomatCodingStandard.Classes.RequireAbstractOrFinal"/>
+        <exclude name="SlevomatCodingStandard.Exceptions.DisallowNonCapturingCatch"/>
     </rule>
 
     <!-- Slevomat coding standards -->
