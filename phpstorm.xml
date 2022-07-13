@@ -21,9 +21,11 @@
         <option name="FORCE_SHORT_DECLARATION_ARRAY_STYLE" value="true" />
         <option name="NAMESPACE_BRACE_STYLE" value="2" />
     </PHPCodeStyleSettings>
-    <XML>
-        <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
-    </XML>
+    <TypeScriptCodeStyleSettings version="0">
+        <option name="SPACES_WITHIN_OBJECT_LITERAL_BRACES" value="true" />
+        <option name="SPACES_WITHIN_IMPORTS" value="true" />
+        <option name="IMPORT_SORT_MODULE_NAME" value="true" />
+    </TypeScriptCodeStyleSettings>
     <codeStyleSettings language="JSON">
         <indentOptions>
             <option name="INDENT_SIZE" value="4" />
@@ -122,6 +124,13 @@
                 </section>
             </rules>
         </arrangement>
+    </codeStyleSettings>
+    <codeStyleSettings language="TypeScript">
+        <indentOptions>
+            <option name="INDENT_SIZE" value="2" />
+            <option name="CONTINUATION_INDENT_SIZE" value="2" />
+            <option name="TAB_SIZE" value="2" />
+        </indentOptions>
     </codeStyleSettings>
     <codeStyleSettings language="yaml">
         <indentOptions>
