@@ -33,8 +33,8 @@ time -f "Elapsed time: %e s." php vendor/bin/paratest -c ./vendor/hanaboso/php-c
 DISTR=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release);
 
 if [ $DISTR = 'alpine' ];
-  then COVERAGE=$(cat /tmp/phpunit-coverage.log | grep -oE '^  Lines.+%' | grep -oE ' \d+' | grep -oE '\d+');
-  else COVERAGE=$(cat /tmp/phpunit-coverage.log | grep -oE '^  Lines.+%' | grep -oE ' [[:digit:]]+' | grep -oE '[[:digit:]]+');
+  then COVERAGE=$(cat /tmp/phpunit-coverage.log | grep -oE '^.{0,8}  Lines.+%' | grep -oE ' \d+' | grep -oE '\d+');
+  else COVERAGE=$(cat /tmp/phpunit-coverage.log | grep -oE '^.{0,8}  Lines.+%' | grep -oE ' [[:digit:]]+' | grep -oE '[[:digit:]]+');
 fi
 
 if [ $COVERAGE -lt $coverage ];
