@@ -80,6 +80,10 @@
         <!-- Exclude from version 7.1 -->
         <exclude name="SlevomatCodingStandard.Classes.RequireAbstractOrFinal"/>
         <exclude name="SlevomatCodingStandard.Exceptions.DisallowNonCapturingCatch"/>
+        <!-- Exclude from version 8.3 -->
+        <exclude name="SlevomatCodingStandard.Classes.ClassLength"/>
+        <exclude name="SlevomatCodingStandard.Files.FileLength"/>
+        <exclude name="SlevomatCodingStandard.Complexity.Cognitive"/>
     </rule>
 
     <!-- Slevomat coding standards -->
