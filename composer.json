@@ -2,7 +2,7 @@
     "name": "hanaboso/php-check-utils",
     "description": "Utils for php development - CodeSniffer, PhpStan, PhpUnit, PhpStorm",
     "license": "MIT",
-    "version": "1.4.8",
+    "version": "1.4.9",
     "authors": [
         {
             "name": "Hanaboso s.r.o.",
@@ -46,7 +46,7 @@
     "require-dev": {
         "doctrine/mongodb-odm": "^2.4",
         "doctrine/orm": "^2.14",
-        "friendsoftwig/twigcs": "^v6.1",
+        "friendsoftwig/twigcs": "^v6.2",
         "phpstan/phpstan-nette": "^1.2"
     },
     "suggest": {

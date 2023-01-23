@@ -39,7 +39,10 @@ trait DatabaseTestTrait
         $parameters = $this->getProperty($connection, 'params');
         $this->setProperty($connection, 'params', array_merge($parameters, ['dbname' => $this->getEmDatabaseName()]));
         [$name, $value] = $this->getPropertyByInstance($this->em, EntityManager::class);
-        $this->setProperty($value, 'conn', $connection);
+
+        if($value){
+            $this->setProperty($value, 'conn', $connection);
+        }
 
         if ($name) {
             $this->setProperty($this->em, $name, $value);
