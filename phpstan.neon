@@ -1,4 +1,6 @@
 includes:
+	- ./../../phpstan/phpstan/conf/bleedingEdge.neon
+	- ./../../phpstan/phpstan-strict-rules/rules.neon
 #	- ./../../phpstan/phpstan-nette/extension.neon
 	- ./../../phpstan/phpstan-symfony/extension.neon
 	- ./../../phpstan/phpstan-phpunit/extension.neon
@@ -32,6 +34,7 @@ parameters:
 		- '#Return type of call to method PHPUnit\\Framework\\MockObject\\MockBuilder<.*>\:\:getMock\(\) contains unresolvable type.#'
 		- '#Property .* is never written, only read#'
 		- '#Service .* is private#'
+		- '#Trying to mock an undefined method#'
 	ergebnis:
 		allowAbstractClasses: true
 		classesAllowedToBeExtended:
@@ -56,6 +59,11 @@ parameters:
 			- Symfony\Contracts\EventDispatcher\Event
 		classesNotRequiredToBeAbstractOrFinal: []
 		interfacesImplementedByContainers: []
+
+	strictRules:
+			disallowedLooseComparison: false
+			disallowedConstructs: false
+			booleansInConditions: false
 
 	disallowedStaticCalls:
 		-
@@ -87,8 +95,6 @@ parametersSchema:
 	])
 
 services:
-	-
-		class: PHPStan\Rules\Operators\OperatorRuleHelper
 	-
 		class: PHPStan\Rules\VariableVariables\VariablePropertyFetchRule
 		arguments:
@@ -138,16 +144,6 @@ rules:
 	- PHPStan\Rules\DisallowedConstructs\DisallowedImplicitArrayCreationRule
 	- PHPStan\Rules\ForeachLoop\OverwriteVariablesWithForeachRule
 	- PHPStan\Rules\Methods\WrongCaseOfInheritedMethodRule
-	- PHPStan\Rules\Operators\OperandInArithmeticPostDecrementRule
-	- PHPStan\Rules\Operators\OperandInArithmeticPostIncrementRule
-	- PHPStan\Rules\Operators\OperandInArithmeticPreDecrementRule
-	- PHPStan\Rules\Operators\OperandInArithmeticPreIncrementRule
-	- PHPStan\Rules\Operators\OperandsInArithmeticAdditionRule
-	- PHPStan\Rules\Operators\OperandsInArithmeticDivisionRule
-	- PHPStan\Rules\Operators\OperandsInArithmeticExponentiationRule
-	- PHPStan\Rules\Operators\OperandsInArithmeticModuloRule
-	- PHPStan\Rules\Operators\OperandsInArithmeticMultiplicationRule
-	- PHPStan\Rules\Operators\OperandsInArithmeticSubtractionRule
 	- PHPStan\Rules\StrictCalls\DynamicCallOnStaticMethodsRule
 	- PHPStan\Rules\StrictCalls\StrictFunctionCallsRule
 	- PHPStan\Rules\SwitchConditions\MatchingTypeInSwitchCaseConditionRule

@@ -28,8 +28,8 @@ trait DatabaseTestTrait
     protected EntityManager $em;
 
     /**
-     * @param array $alwaysClearTables
-     * @param array $neverClearTables
+     * @param mixed[] $alwaysClearTables
+     * @param mixed[] $neverClearTables
      *
      * @throws Exception
      */

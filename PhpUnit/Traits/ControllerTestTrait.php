@@ -57,8 +57,8 @@ trait ControllerTestTrait
     protected static string $REQUEST = '#(GET|POST|PUT|PATCH|DELETE) /#';
 
     /**
-     * @param array $options
-     * @param array $server
+     * @param mixed[] $options
+     * @param mixed[] $server
      */
     protected function startClient(array $options = [], array $server = []): void
     {
@@ -70,10 +70,10 @@ trait ControllerTestTrait
 
     /**
      * @param string       $path
-     * @param array        $responseReplacements
-     * @param array        $requestHttpReplacements
-     * @param array        $requestBodyReplacements
-     * @param array        $requestHeadersReplacements
+     * @param mixed[]      $responseReplacements
+     * @param mixed[]      $requestHttpReplacements
+     * @param mixed[]      $requestBodyReplacements
+     * @param mixed[]      $requestHeadersReplacements
      * @param Closure|NULL $bodyCallback
      *
      * @throws JsonException
@@ -206,17 +206,19 @@ trait ControllerTestTrait
         } else {
             self::fail($response->getContent() ?: 'No Content');
         }
+
+        return [];
     }
 
     /**
      * @param string       $method
      * @param string       $url
-     * @param array        $body
-     * @param array        $headers
-     * @param array        $files
+     * @param mixed[]      $body
+     * @param mixed[]      $headers
+     * @param mixed[]      $files
      * @param Closure|NULL $bodyCallback
      *
-     * @return array
+     * @return mixed[]
      * @throws JsonException
      */
     protected function sendRequest(
@@ -278,10 +280,10 @@ trait ControllerTestTrait
      */
 
     /**
-     * @param string $path
-     * @param array  $replacements
+     * @param string  $path
+     * @param mixed[] $replacements
      *
-     * @return array
+     * @return mixed[]
      * @throws JsonException
      */
     private function getControllerRequest(string $path, array $replacements = []): array
@@ -316,7 +318,7 @@ trait ControllerTestTrait
     /**
      * @param string $path
      *
-     * @return array
+     * @return mixed[]
      * @throws JsonException
      */
     private function getControllerResponse(string $path): array
@@ -351,7 +353,7 @@ trait ControllerTestTrait
     /**
      * @param string $path
      *
-     * @return array
+     * @return mixed[]
      * @throws JsonException
      */
     private function getContent(string $path): array
@@ -360,10 +362,10 @@ trait ControllerTestTrait
     }
 
     /**
-     * @param array $data
-     * @param array $replacements
+     * @param mixed[] $data
+     * @param mixed[] $replacements
      *
-     * @return array
+     * @return mixed[]
      */
     private function replaceDynamicData(array $data, array $replacements): array
     {

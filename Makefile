@@ -33,7 +33,7 @@ phpcodesniffer:
 	$(DE) ./vendor/bin/phpcs --parallel=$$(nproc) --standard=./tests/ruleset.xml HanabosoCodingStandard PhpUnit TwigCs
 
 phpstan:
-	$(DE) ./vendor/bin/phpstan analyse -c ./tests/phpstan.neon -l 8 HanabosoCodingStandard PhpUnit TwigCs
+	$(DE) ./vendor/bin/phpstan analyse -c ./tests/phpstan.neon -l 8 HanabosoCodingStandard PhpUnit TwigCs tests/Traits
 
 phpunit:
 	$(DE) ./vendor/bin/paratest -c ./tests/phpunit.xml.dist tests/Unit
