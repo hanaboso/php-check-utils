@@ -35,9 +35,9 @@ phpcodesniffer:
 phpstan:
 	$(DE) ./vendor/bin/phpstan analyse -c ./tests/phpstan.neon -l 8 HanabosoCodingStandard PhpUnit TwigCs tests/Traits
 
-phpunit:
+unit:
 	$(DE) ./vendor/bin/paratest -c ./tests/phpunit.xml.dist tests/Unit
 
 test: docker-up-force composer-install fasttest
 
-fasttest: phpcodesniffer phpstan phpunit
+fasttest: phpcodesniffer phpstan unit

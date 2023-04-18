@@ -5,7 +5,6 @@
          cacheResult="false"
          failOnRisky="true"
          failOnWarning="true"
-         verbose="true"
          stderr="true"
 >
 
@@ -15,7 +14,7 @@
     </php>
 
     <extensions>
-        <bootstrap class="Hanaboso\PhpCheckUtils\PhpUnit\Extension\FinalMock"/>
+        <bootstrap class="Hanaboso\PhpCheckUtils\PhpUnit\Extension\FinalMock\FinalMockExtension"/>
     </extensions>
 
     <coverage cacheDirectory="./../../../var/coverageCache">
