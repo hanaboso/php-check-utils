@@ -15,7 +15,7 @@
     </php>
 
     <extensions>
-        <extension class="Hanaboso\PhpCheckUtils\PhpUnit\Hooks\FinalMockHook"/>
+        <bootstrap class="Hanaboso\PhpCheckUtils\PhpUnit\Extension\FinalMock"/>
     </extensions>
 
     <coverage cacheDirectory="./../../../var/coverageCache">

@@ -253,8 +253,8 @@ trait ControllerTestTrait
 
             return [
                 self::$BODY    => $bodyCallback ? $bodyCallback($response) : $response->getJsonBody(),
-                self::$STATUS  => $response->getStatusCode(),
                 self::$HEADERS => $response->getHeaders(),
+                self::$STATUS  => $response->getStatusCode(),
             ];
         } else if (isset($this->client)) {
             $this->client->request($method, $url, $body, $files, $headers, (string) json_encode($body));
@@ -267,8 +267,8 @@ trait ControllerTestTrait
                     512,
                     JSON_THROW_ON_ERROR,
                 ),
-                self::$STATUS  => $response->getStatusCode(),
                 self::$HEADERS => $response->headers->all(),
+                self::$STATUS  => $response->getStatusCode(),
             ];
         } else {
             throw new LogicException('Dispatcher or client is not set');
