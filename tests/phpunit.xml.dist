@@ -6,6 +6,7 @@
          failOnRisky="true"
          failOnWarning="true"
          stderr="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
 >
 
     <php>

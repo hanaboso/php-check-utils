@@ -59,6 +59,7 @@ parameters:
 			- Symfony\Contracts\EventDispatcher\Event
 		classesNotRequiredToBeAbstractOrFinal: []
 		interfacesImplementedByContainers: []
+		methodsAllowedToUseContainerTypeDeclarations: []
 
 	strictRules:
 			disallowedLooseComparison: false
@@ -92,6 +93,7 @@ parametersSchema:
 		classesAllowedToBeExtended: listOf(string())
 		classesNotRequiredToBeAbstractOrFinal: listOf(string())
 		interfacesImplementedByContainers: listOf(string())
+		methodsAllowedToUseContainerTypeDeclarations: listOf(string())
 	])
 
 services:
@@ -133,6 +135,7 @@ services:
 		class: Ergebnis\PHPStan\Rules\Methods\NoParameterWithContainerTypeDeclarationRule
 		arguments:
 			interfacesImplementedByContainers: %ergebnis.interfacesImplementedByContainers%
+			methodsAllowedToUseContainerTypeDeclarations: %ergebnis.methodsAllowedToUseContainerTypeDeclarations%
 		tags:
 			- phpstan.rules.rule
 
