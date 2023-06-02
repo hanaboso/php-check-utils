@@ -25,11 +25,11 @@ if [ "$whitelist" = '' ];
     then whitelist='src';
 fi
 
-if [ "$exclude" = '' ];
-    then exclude='unknown';
+if [ "$exclude" != '' ];
+    then exclude="--exclude-group $exclude";
 fi
 
-time -f "Elapsed time: %e s." php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p $processes --coverage-text --coverage-filter $whitelist --exclude-group $exclude $tests | tee /tmp/phpunit-coverage.log
+time -f "Elapsed time: %e s." php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p $processes --coverage-text --coverage-filter $whitelist $exclude $tests | tee /tmp/phpunit-coverage.log
 DISTR=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release);
 
 if [ $DISTR = 'alpine' ];
