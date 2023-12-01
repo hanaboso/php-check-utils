@@ -84,6 +84,7 @@
         <exclude name="SlevomatCodingStandard.Classes.ClassLength"/>
         <exclude name="SlevomatCodingStandard.Files.FileLength"/>
         <exclude name="SlevomatCodingStandard.Complexity.Cognitive"/>
+        <exclude name="SlevomatCodingStandard.Attributes.AttributesOrder"/>
     </rule>
 
     <!-- Slevomat coding standards -->
