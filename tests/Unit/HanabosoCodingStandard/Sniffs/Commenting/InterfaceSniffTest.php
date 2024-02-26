@@ -4,26 +4,22 @@ namespace Hanaboso\TestsPhpCheckUtils\Unit\HanabosoCodingStandard\Sniffs\Comment
 
 use Hanaboso\TestsPhpCheckUtils\KernelTestCaseAbstract;
 use HanabosoCodingStandard\Sniffs\Commenting\InterfaceSniff;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class InterfaceSniffTest
  *
  * @package Hanaboso\TestsPhpCheckUtils\Unit\HanabosoCodingStandard\Sniffs\Commenting
  */
+#[CoversClass(InterfaceSniff::class)]
 final class InterfaceSniffTest extends KernelTestCaseAbstract implements NullInterface
 {
 
-    /**
-     * @covers \HanabosoCodingStandard\Sniffs\Commenting\InterfaceSniff::register
-     */
     public function testRegister(): void
     {
-        self::assertEquals([371], (new InterfaceSniff())->register());
+        self::assertEquals([335], (new InterfaceSniff())->register());
     }
 
-    /**
-     * @covers \HanabosoCodingStandard\Sniffs\Commenting\InterfaceSniff::process
-     */
     public function testProcess(): void
     {
         $err1 = [

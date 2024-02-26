@@ -4,12 +4,14 @@ namespace Hanaboso\TestsPhpCheckUtils\Unit\HanabosoCodingStandard\Sniffs\Comment
 
 use Hanaboso\TestsPhpCheckUtils\KernelTestCaseAbstract;
 use HanabosoCodingStandard\Sniffs\Commenting\ConstructorSniff;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class ConstructorSniffTest
  *
  * @package Hanaboso\TestsPhpCheckUtils\Unit\HanabosoCodingStandard\Sniffs\Commenting
  */
+#[CoversClass(ConstructorSniff::class)]
 final class ConstructorSniffTest extends KernelTestCaseAbstract
 {
 
@@ -18,17 +20,11 @@ final class ConstructorSniffTest extends KernelTestCaseAbstract
         parent::__construct($name, $data, $dataName);
     }
 
-    /**
-     * @covers \HanabosoCodingStandard\Sniffs\Commenting\ConstructorSniff::register
-     */
     public function testRegister(): void
     {
-        self::assertEquals([347], (new ConstructorSniff())->register());
+        self::assertEquals([310], (new ConstructorSniff())->register());
     }
 
-    /**
-     * @covers \HanabosoCodingStandard\Sniffs\Commenting\ConstructorSniff::process
-     */
     public function testProcess(): void
     {
         $item = [
@@ -41,7 +37,7 @@ final class ConstructorSniffTest extends KernelTestCaseAbstract
 
         $res = $this->processSniffTest(__DIR__ . '/ConstructorSniffTest.php', ConstructorSniff::class);
 
-        self::assertEquals([16 => [21 => [$item]]], $res->getErrors());
+        self::assertEquals([18 => [21 => [$item]]], $res->getErrors());
     }
 
 }

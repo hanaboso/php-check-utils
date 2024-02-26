@@ -4,26 +4,22 @@ namespace Hanaboso\TestsPhpCheckUtils\Unit\HanabosoCodingStandard\Sniffs\Comment
 
 use Hanaboso\TestsPhpCheckUtils\KernelTestCaseAbstract;
 use HanabosoCodingStandard\Sniffs\Commenting\TraitSniff;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class TraitSniffTest
  *
  * @package Hanaboso\TestsPhpCheckUtils\Unit\HanabosoCodingStandard\Sniffs\Commenting
  */
+#[CoversClass(TraitSniff::class)]
 final class TraitSniffTest extends KernelTestCaseAbstract
 {
 
-    /**
-     * @covers \HanabosoCodingStandard\Sniffs\Commenting\TraitSniff::register
-     */
     public function testRegister(): void
     {
-        self::assertEquals([370], (new TraitSniff())->register());
+        self::assertEquals([334], (new TraitSniff())->register());
     }
 
-    /**
-     * @covers \HanabosoCodingStandard\Sniffs\Commenting\TraitSniff::process
-     */
     public function testProcess(): void
     {
         $err1 = [

@@ -61,7 +61,7 @@ trait DatabaseTestTrait
         $tables = array_unique(array_merge($tables, $alwaysClearTables));
         $tables = array_diff($tables, $neverClearTables);
 
-        foreach ($connection->getSchemaManager()->listTables() as $table) {
+        foreach ($connection->createSchemaManager()->listTables() as $table) {
             if (in_array($table->getName(), $tables, TRUE)) {
                 $this->em->getConnection()->executeStatement(sprintf('TRUNCATE TABLE `%s`;', $table->getName()));
             }

@@ -4,21 +4,17 @@ namespace Hanaboso\TestsPhpCheckUtils\Unit\HanabosoCodingStandard\Sniffs\Comment
 
 use Hanaboso\TestsPhpCheckUtils\KernelTestCaseAbstract;
 use HanabosoCodingStandard\Sniffs\Commenting\ClassSniff;
+use PHPUnit\Framework\Attributes\CoversClass;
 
+#[CoversClass(ClassSniff::class)]
 final class ClassSniffTest extends KernelTestCaseAbstract
 {
 
-    /**
-     * @covers \HanabosoCodingStandard\Sniffs\Commenting\ClassSniff::register
-     */
     public function testRegister(): void
     {
-        self::assertEquals([369], (new ClassSniff())->register());
+        self::assertEquals([333], (new ClassSniff())->register());
     }
 
-    /**
-     * @covers \HanabosoCodingStandard\Sniffs\Commenting\ClassSniff::process
-     */
     public function testProcess(): void
     {
         $err1 = [
@@ -39,7 +35,7 @@ final class ClassSniffTest extends KernelTestCaseAbstract
 
         $res = $this->processSniffTest(__DIR__ . '/ClassSniffTest.php', ClassSniff::class);
 
-        self::assertEquals([8 => [8 => [$err1, $err2]]], $res->getErrors());
+        self::assertEquals([10 => [8 => [$err1, $err2]]], $res->getErrors());
     }
 
 }
