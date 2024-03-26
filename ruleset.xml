@@ -75,7 +75,6 @@
         <exclude name="SlevomatCodingStandard.Functions.DisallowNamedArguments.DisallowedNamedArgument"/>
         <exclude name="SlevomatCodingStandard.Functions.DisallowTrailingCommaInDeclaration"/>
         <exclude name="SlevomatCodingStandard.Functions.DisallowTrailingCommaInCall"/>
-        <exclude name="SlevomatCodingStandard.Files.FunctionLength"/>
         <exclude name="SlevomatCodingStandard.Functions.FunctionLength"/>
         <!-- Exclude from version 7.1 -->
         <exclude name="SlevomatCodingStandard.Classes.RequireAbstractOrFinal"/>
