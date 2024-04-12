@@ -16,6 +16,7 @@ trait DatabaseTestTrait
 {
 
     use PrivateTrait;
+    use RestoreErrorHandlersTrait;
 
     /**
      * @var DocumentManager
@@ -122,6 +123,9 @@ trait DatabaseTestTrait
         if (isset($this->dm)) {
             $this->dm->close();
         }
+
+        $this->restoreErrorHandler();
+        $this->restoreExceptionHandler();
     }
 
     /**
