@@ -65,7 +65,7 @@ trait DatabaseTestTrait
         foreach ($connection->createSchemaManager()->listTables() as $table) {
             if (in_array($table->getName(), $tables, TRUE)) {
                 // @phpstan-ignore-next-line
-                $this->em->getConnection()->executeStatement('TRUNCATE TABLE `%s`;', $table->getName());
+                $this->em->getConnection()->executeStatement(sprintf('TRUNCATE TABLE `%s`;', $table->getName()));
             }
         }
         $connection->executeStatement('SET FOREIGN_KEY_CHECKS = 0;');
