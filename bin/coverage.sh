@@ -29,7 +29,7 @@ if [ "$exclude" != '' ];
     then exclude="--exclude-group $exclude";
 fi
 
-time -f "Elapsed time: %e s." php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p $processes --coverage-text --coverage-filter $whitelist $exclude $tests | tee /tmp/phpunit-coverage.log
+time -f "Elapsed time: %e s." php vendor/bin/paratest -c ./vendor/hanaboso/php-check-utils/phpunit.xml.dist -p $processes --coverage-text /tmp/phpunit-coverage.log --cache-directory /tmp --coverage-filter $whitelist $exclude $tests
 DISTR=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release);
 
 if [ $DISTR = 'alpine' ];

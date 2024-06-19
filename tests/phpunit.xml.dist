@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="./../../../phpunit/phpunit/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.2/phpunit.xsd"
          colors="true"
          cacheResult="false"
          failOnRisky="true"
@@ -8,16 +8,13 @@
          stderr="true"
          displayDetailsOnTestsThatTriggerWarnings="true"
 >
-
-    <php>
-        <env name="APP_ENV" value="test" force="true"/>
-        <env name="APP_DEBUG" value="1" force="true"/>
-    </php>
-
-    <extensions>
-        <bootstrap class="Hanaboso\PhpCheckUtils\PhpUnit\Extension\FinalMock\FinalMockExtension"/>
-    </extensions>
-
-    <coverage cacheDirectory="./../var/coverageCache">
-    </coverage>
+  <php>
+    <env name="APP_ENV" value="test" force="true"/>
+    <env name="APP_DEBUG" value="1" force="true"/>
+  </php>
+  <extensions>
+    <bootstrap class="Hanaboso\PhpCheckUtils\PhpUnit\Extension\FinalMock\FinalMockExtension"/>
+  </extensions>
+  <coverage>
+  </coverage>
 </phpunit>
