@@ -17,16 +17,16 @@ docker-down-clean: .env
 
 # Composer
 composer-install:
-	$(DE) composer install
-	$(DE) composer update --dry-run roave/security-advisories
+	$(DE) composer install --ignore-platform-reqs
+	$(DE) composer update --dry-run roave/security-advisories --ignore-platform-reqs
 
 composer-update:
-	$(DE) composer update
-	$(DE) composer update --dry-run roave/security-advisories
+	$(DE) composer update --ignore-platform-reqs
+	$(DE) composer update --dry-run roave/security-advisories --ignore-platform-reqs
 	$(DE) composer normalize
 
 composer-outdated:
-	$(DE) composer outdated
+	$(DE) composer outdated --ignore-platform-reqs
 
 # Tests
 phpcodesniffer:

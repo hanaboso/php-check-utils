@@ -17,7 +17,7 @@ final class TraitSniffTest extends KernelTestCaseAbstract
 
     public function testRegister(): void
     {
-        self::assertEquals([370], (new TraitSniff())->register());
+        self::assertEquals([337], (new TraitSniff())->register());
     }
 
     public function testProcess(): void

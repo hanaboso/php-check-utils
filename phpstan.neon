@@ -16,15 +16,13 @@ includes:
 parameters:
 	polluteScopeWithLoopInitialAssignments: false
 	polluteScopeWithAlwaysIterableForeach: false
-	checkAlwaysTrueCheckTypeFunctionCall: true
-	checkAlwaysTrueInstanceof: true
-	checkAlwaysTrueStrictComparison: true
 	checkExplicitMixedMissingReturn: true
 	checkFunctionNameCase: true
 	reportMaybesInMethodSignatures: true
 	reportStaticMethodSignatures: true
 	reportUnmatchedIgnoredErrors: false
 	ignoreErrors:
+		- identifier: ternary.shortNotAllowed
 		- '#Expression \"\$.*\" on a separate line does not do anything\.#'
 		- '#Call to an undefined method Doctrine\\Common\\Persistence\\ObjectRepository::*.#' # remove after better doctrine support
 		- '#Call to an undefined method Doctrine\\ORM\\EntityRepository::*.#' # remove after better doctrine support
@@ -63,7 +61,6 @@ parameters:
 
 	strictRules:
 			disallowedLooseComparison: false
-			disallowedConstructs: false
 			booleansInConditions: false
 
 	disallowedStaticCalls:
@@ -108,6 +105,7 @@ services:
 		class: PHPStan\Rules\Cast\UselessCastRule
 		arguments:
 			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+			treatPhpDocTypesAsCertainTip: %tips.treatPhpDocTypesAsCertain%
 		tags:
 			- phpstan.rules.rule
 
@@ -158,3 +156,4 @@ rules:
 	- Ergebnis\PHPStan\Rules\Expressions\NoErrorSuppressionRule
 	- Ergebnis\PHPStan\Rules\Expressions\NoEvalRule
 	- Ergebnis\PHPStan\Rules\Files\DeclareStrictTypesRule
+
