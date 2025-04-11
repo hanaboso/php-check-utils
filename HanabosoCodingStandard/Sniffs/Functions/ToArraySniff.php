@@ -13,9 +13,9 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 final class ToArraySniff implements Sniff
 {
 
-    public const ERROR_MESSAGE = 'Public method toArray() should be the last one.';
+    public const string ERROR_MESSAGE = 'Public method toArray() should be the last one.';
 
-    private const TO_ARRAY = 'toArray';
+    private const string TO_ARRAY = 'toArray';
 
     /**
      * @return int[]

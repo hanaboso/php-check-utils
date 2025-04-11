@@ -33,7 +33,7 @@ trait PrivateTrait
             }
 
             $reflection = $reflection->getParentClass();
-        } while ($reflection);
+        } while ($reflection !== FALSE);
 
         throw new LogicException(sprintf("Property '%s' Not Found!", $propertyName));
     }
@@ -57,7 +57,7 @@ trait PrivateTrait
             }
 
             $reflection = $reflection->getParentClass();
-        } while ($reflection);
+        } while ($reflection !== FALSE);
 
         throw new LogicException(sprintf("Property '%s' Not Found!", $propertyName));
     }
@@ -109,7 +109,7 @@ trait PrivateTrait
             }
 
             $reflection = $reflection->getParentClass();
-        } while ($reflection);
+        } while ($reflection !== FALSE);
 
         throw new LogicException(sprintf("Method '%s' Not Found!", $methodName));
     }

@@ -13,16 +13,16 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 abstract class SniffAbstract implements Sniff
 {
 
-    protected const TYPE_CLASS       = 'Class';
-    protected const TYPE_INTERFACE   = 'Interface';
-    protected const TYPE_TRAIT       = 'Trait';
-    protected const TYPE_CONSTRUCTOR = 'Constructor';
+    protected const string TYPE_CLASS       = 'Class';
+    protected const string TYPE_INTERFACE   = 'Interface';
+    protected const string TYPE_TRAIT       = 'Trait';
+    protected const string TYPE_CONSTRUCTOR = 'Constructor';
 
-    protected const CODE    = 'code';
-    protected const CONTENT = 'content';
+    protected const string CODE    = 'code';
+    protected const string CONTENT = 'content';
 
-    private const PATTERN = '#\r\n|\r|\n#';
-    private const REPLACE = [
+    private const string PATTERN = '#\r\n|\r|\n#';
+    private const array REPLACE  = [
         '{NAMESPACE}',
         '{NAME}',
         '{TYPE}',

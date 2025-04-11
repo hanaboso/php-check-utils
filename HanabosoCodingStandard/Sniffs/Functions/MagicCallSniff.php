@@ -15,7 +15,7 @@ use Throwable;
 final class MagicCallSniff implements Sniff
 {
 
-    public const ERROR_MESSAGE = 'Callback from array is not allowed, use anonymous function instead.';
+    public const string ERROR_MESSAGE = 'Callback from array is not allowed, use anonymous function instead.';
 
     /**
      * @return int[]
@@ -170,7 +170,7 @@ final class MagicCallSniff implements Sniff
     private function findInUsages(File $file, string $content): string
     {
         $pos = $file->findNext(T_USE, 0);
-        while ($pos) {
+        while ($pos !== FALSE) {
             $ns = $this->getFqn($file, $pos);
             if (substr($ns, -strlen($content)) === $content) {
                 return $ns;
