@@ -63,6 +63,7 @@ trait DatabaseTestTrait
         $tables = array_diff($tables, $neverClearTables);
 
         foreach ($connection->createSchemaManager()->listTables() as $table) {
+            // @phpstan-ignore-next-line
             if (in_array($table->getName(), $tables, TRUE)) {
                 // @phpstan-ignore-next-line
                 $this->em->getConnection()->executeStatement(sprintf('TRUNCATE TABLE `%s`;', $table->getName()));

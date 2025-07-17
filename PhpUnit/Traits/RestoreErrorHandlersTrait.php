@@ -35,6 +35,7 @@ trait RestoreErrorHandlersTrait
         while (TRUE) {
             $previousHandler = set_error_handler(NULL);
             restore_error_handler();
+            // @phpstan-ignore-next-line
             $isPhpUnitErrorHandler = ($previousHandler instanceof ErrorHandler);
             if ($previousHandler === NULL || $isPhpUnitErrorHandler) {
                 break;

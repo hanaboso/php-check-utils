@@ -26,18 +26,8 @@ abstract class KernelTestCaseAbstract extends TestCase
      */
     protected Runner $runner;
 
-    /**
-     * KernelTestCaseAbstract constructor.
-     *
-     * @param string|null $name
-     * @param array       $data
-     * @param string      $dataName
-     *
-     * @throws Exception
-     */
-    public function __construct(?string $name = NULL, array $data = [], string $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
+
+    protected function setUp(): void {
         include_once __DIR__ . '/../vendor/autoload.php';
         include_once __DIR__ . '/../vendor/squizlabs/php_codesniffer/autoload.php';
         $this->runner         = new Runner();

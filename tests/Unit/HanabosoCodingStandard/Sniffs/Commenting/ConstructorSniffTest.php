@@ -15,11 +15,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 final class ConstructorSniffTest extends KernelTestCaseAbstract
 {
 
-    public function __construct(?string $name = NULL, array $data = [], string $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-    }
-
     public function testRegister(): void
     {
         self::assertEquals([310], (new ConstructorSniff())->register());
@@ -28,16 +23,16 @@ final class ConstructorSniffTest extends KernelTestCaseAbstract
     public function testProcess(): void
     {
         $item = [
-            'message'  => 'Usage of constructor comment without \'ConstructorSniffTest constructor.\' is not allowed.',
+            'message'  => 'Usage of constructor comment without \'NullClass constructor.\' is not allowed.',
             'source'   => 'HanabosoCodingStandard.Commenting.Constructor.Comment',
             'listener' => 'HanabosoCodingStandard\Sniffs\Commenting\ConstructorSniff',
             'severity' => 5,
             'fixable'  => FALSE,
         ];
 
-        $res = $this->processSniffTest(__DIR__ . '/ConstructorSniffTest.php', ConstructorSniff::class);
+        $res = $this->processSniffTest(__DIR__ . '/NullClass.php', ConstructorSniff::class);
 
-        self::assertEquals([18 => [21 => [$item]]], $res->getErrors());
+        self::assertEquals([7 => [21 => [$item]]], $res->getErrors());
     }
 
 }
