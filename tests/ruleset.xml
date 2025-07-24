@@ -6,7 +6,9 @@
     <rule ref="./HanabosoCodingStandard/ruleset.xml"/>
     <rule ref="HanabosoCodingStandard.Strings.ConcatenationString">
         <properties>
-            <property name="allowedConstants" type="array" value="0=>__DIR__"/>
+            <property name="allowedConstants" type="array">
+                <element key="0" value="__DIR__"/>
+            </property>
         </properties>
     </rule>
 
@@ -174,7 +176,11 @@
 
     <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
         <properties>
-            <property name="rootNamespaces" type="array" value="TwigCs=>Hanaboso\PhpCheckUtils\TwigCs,PhpUnit=>Hanaboso\PhpCheckUtils\PhpUnit,HanabosoCodingStandard=>HanabosoCodingStandard"/>
+            <property name="rootNamespaces" type="array">
+                <element key="TwigCs" value="Hanaboso\PhpCheckUtils\TwigCs"/>
+                <element key="PhpUnit" value="Hanaboso\PhpCheckUtils\PhpUnit"/>
+                <element key="HanabosoCodingStandard" value="HanabosoCodingStandard"/>
+            </property>
         </properties>
     </rule>
 </ruleset>
