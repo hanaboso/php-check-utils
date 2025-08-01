@@ -6,5 +6,4 @@ services:
             COMPOSER_HOME: ${HOME}/dev/.composer
         volumes:
             - ./:/var/www:cached
-            - ${SSH_AUTH}:/tmp/.ssh-auth-sock
             - ${HOME}/dev/.composer:${HOME}/dev/.composer:cached
