@@ -149,11 +149,11 @@ trait ControllerTestTrait
         $request = NULL;
 
         if (file_exists($path)) {
-            $request = file_get_contents($path);
+            $request = (string) file_get_contents($path);
         }
 
         foreach ($fragments as $fragment) {
-            $request = sprintf('%s%s%s', file_get_contents($fragment), PHP_EOL, $request);
+            $request = sprintf('%s%s%s', (string) file_get_contents($fragment), PHP_EOL, $request ?? '');
         }
 
         if ($replaceRequest) {
@@ -335,8 +335,8 @@ trait ControllerTestTrait
                 FILE_APPEND,
             );
 
-            exec(sprintf('chown %s %s', getenv('DEV_UID'), $path));
-            exec(sprintf('chgrp %s %s', getenv('DEV_GID'), $path));
+            exec(sprintf('chown %s %s', (string) getenv('DEV_UID'), $path));
+            exec(sprintf('chgrp %s %s', (string) getenv('DEV_GID'), $path));
         }
 
         $content = $this->getContent($path);
@@ -400,8 +400,8 @@ trait ControllerTestTrait
                 sprintf('%s%s', json_encode($response, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR), PHP_EOL),
             );
 
-            exec(sprintf('chown %s %s', getenv('DEV_UID'), $path));
-            exec(sprintf('chgrp %s %s', getenv('DEV_GID'), $path));
+            exec(sprintf('chown %s %s', (string) getenv('DEV_UID'), $path));
+            exec(sprintf('chgrp %s %s', (string) getenv('DEV_GID'), $path));
         }
 
         return $this->getContent($path);

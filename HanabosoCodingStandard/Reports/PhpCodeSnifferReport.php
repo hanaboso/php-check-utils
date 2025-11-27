@@ -23,7 +23,7 @@ final class PhpCodeSnifferReport implements Report
      */
     public function __construct()
     {
-        $this->root = sprintf('%s/', getcwd());
+        $this->root = sprintf('%s/', (string) getcwd());
     }
 
     /**

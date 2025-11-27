@@ -163,7 +163,7 @@ trait DatabaseTestTrait
      */
     private function getEmDatabaseName(): string
     {
-        return sprintf('%s%s', $this->em->getConnection()->getDatabase(), getenv('TEST_TOKEN'));
+        return sprintf('%s%s', $this->em->getConnection()->getDatabase(), (string) getenv('TEST_TOKEN'));
     }
 
     /**
@@ -171,7 +171,7 @@ trait DatabaseTestTrait
      */
     private function getDmDatabaseName(): string
     {
-        return sprintf('%s%s', $this->dm->getConfiguration()->getDefaultDB(), getenv('TEST_TOKEN'));
+        return sprintf('%s%s', $this->dm->getConfiguration()->getDefaultDB(), (string) getenv('TEST_TOKEN'));
     }
 
 }

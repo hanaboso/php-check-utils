@@ -25,7 +25,7 @@ final class PhpStanReport implements ErrorFormatter
      */
     public function __construct()
     {
-        $this->root = sprintf('%s/', getcwd());
+        $this->root = sprintf('%s/', (string) getcwd());
     }
 
     /**
