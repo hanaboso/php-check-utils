@@ -28,6 +28,7 @@ abstract class SniffAbstract implements Sniff
         '{TYPE}',
     ];
     private const array NAMESPACE_TOKENS = [
+        T_STRING,
         T_NAME_RELATIVE,
         T_NAME_QUALIFIED,
         T_NAME_FULLY_QUALIFIED,
@@ -49,15 +50,23 @@ abstract class SniffAbstract implements Sniff
      */
     protected function getNamespaceName(File $file, int $position): string
     {
-        $result   = 'Unknown';
-        $tokens   = $file->getTokens();
+        $result     = 'Unknown';
+        $tokens     = $file->getTokens();
+        $namespaces = [];
+
         $position = $file->findPrevious(T_NAMESPACE, $position);
 
         if (is_int($position)) {
             $position = $file->findNext(self::NAMESPACE_TOKENS, $position);
 
-            if (is_int($position) && isset($tokens[$position][self::CONTENT])) {
-                $result = $tokens[$position][self::CONTENT];
+            if (is_int($position)) {
+                $closePosition = $file->findEndOfStatement($position);
+
+                for (; $position < $closePosition; $position++) {
+                    $namespaces[] = $tokens[$position][self::CONTENT];
+                }
+
+                $result = implode('', $namespaces);
             }
         }
 
@@ -78,7 +87,7 @@ abstract class SniffAbstract implements Sniff
 
         if (is_int($startPosition)) {
             $iterator      = 0;
-            $closePosition = $tokens[$startPosition]['comment_closer'];
+            $closePosition = $file->findNext(T_DOC_COMMENT_CLOSE_TAG, $startPosition + 1);
 
             for (; $startPosition < $closePosition; $startPosition++) {
                 $token                  = $tokens[$startPosition];
