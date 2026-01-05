@@ -43,7 +43,7 @@ final class ToArraySniff implements Sniff
             $token = $tokens[$pos];
             $code  = $token['code'];
             // Class and other possible scope ends
-            if ($code === 'PHPCS_T_CLOSE_CURLY_BRACKET') {
+            if ($code === T_CLOSE_CURLY_BRACKET) {
                 return;
             }
 

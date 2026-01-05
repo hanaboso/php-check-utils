@@ -21,11 +21,16 @@ abstract class SniffAbstract implements Sniff
     protected const string CODE    = 'code';
     protected const string CONTENT = 'content';
 
-    private const string PATTERN = '#\r\n|\r|\n#';
-    private const array REPLACE  = [
+    private const string PATTERN         = '#\r\n|\r|\n#';
+    private const array REPLACE          = [
         '{NAMESPACE}',
         '{NAME}',
         '{TYPE}',
+    ];
+    private const array NAMESPACE_TOKENS = [
+        T_NAME_RELATIVE,
+        T_NAME_QUALIFIED,
+        T_NAME_FULLY_QUALIFIED,
     ];
 
     /**
@@ -44,23 +49,15 @@ abstract class SniffAbstract implements Sniff
      */
     protected function getNamespaceName(File $file, int $position): string
     {
-        $result     = 'Unknown';
-        $tokens     = $file->getTokens();
-        $namespaces = [];
-
+        $result   = 'Unknown';
+        $tokens   = $file->getTokens();
         $position = $file->findPrevious(T_NAMESPACE, $position);
 
         if (is_int($position)) {
-            $position = $file->findNext(T_STRING, $position);
+            $position = $file->findNext(self::NAMESPACE_TOKENS, $position);
 
-            if (is_int($position)) {
-                $closePosition = $file->findEndOfStatement($position);
-
-                for (; $position < $closePosition; $position++) {
-                    $namespaces[] = $tokens[$position][self::CONTENT];
-                }
-
-                $result = implode('', $namespaces);
+            if (is_int($position) && isset($tokens[$position][self::CONTENT])) {
+                $result = $tokens[$position][self::CONTENT];
             }
         }
 
@@ -81,7 +78,7 @@ abstract class SniffAbstract implements Sniff
 
         if (is_int($startPosition)) {
             $iterator      = 0;
-            $closePosition = $file->findNext(T_DOC_COMMENT_CLOSE_TAG, $startPosition + 1);
+            $closePosition = $tokens[$startPosition]['comment_closer'];
 
             for (; $startPosition < $closePosition; $startPosition++) {
                 $token                  = $tokens[$startPosition];
