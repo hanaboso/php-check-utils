@@ -2,7 +2,7 @@
     "name": "hanaboso/php-check-utils",
     "description": "Utils for php development - CodeSniffer, PhpStan, PhpUnit, PhpStorm",
     "license": "MIT",
-    "version": "1.7.4",
+    "version": "2.0.0",
     "authors": [
         {
             "name": "Hanaboso s.r.o.",
@@ -36,12 +36,12 @@
         "phpstan/phpstan-strict-rules": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^12.4",
-        "slevomat/coding-standard": "^8.22",
+        "slevomat/coding-standard": "^8.26",
         "spaze/phpstan-disallowed-calls": "^4.7",
-        "squizlabs/php_codesniffer": "^3.13",
-        "symfony/browser-kit": "^7.3",
-        "symfony/framework-bundle": "^7.3",
-        "symfony/security-core": "^7.3"
+        "squizlabs/php_codesniffer": "^4.0",
+        "symfony/browser-kit": "^8.0",
+        "symfony/framework-bundle": "^8.0",
+        "symfony/security-core": "^8.0"
     },
     "require-dev": {
         "doctrine/mongodb-odm": "^2.15",

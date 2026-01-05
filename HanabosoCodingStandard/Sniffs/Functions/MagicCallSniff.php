@@ -36,27 +36,27 @@ final class MagicCallSniff implements Sniff
         $caller = NULL;
         $i      = ++$stackPtr;
         for (; $i < $end; $i++) {
-            $type = $tokens[$i]['type'];
+            $code = $tokens[$i]['code'];
             // Skips nested arrays
-            if ($type === 'T_OPEN_SHORT_ARRAY') {
+            if ($code === T_OPEN_SHORT_ARRAY) {
                 $i = $tokens[$i]['bracket_closer'] - 1;
 
                 continue;
             }
-            if ($type === 'T_VARIABLE' && $tokens[$i]['content'] == '$this') {
+            if ($code === T_VARIABLE && $tokens[$i]['content'] == '$this') {
                 // Skip whitespaces to check that next token is a comma
-                while (($tokens[++$i]['type'] ?? '') === 'T_WHITESPACE') {
+                while (($tokens[++$i]['code'] ?? NULL) === T_WHITESPACE) {
                     // empty while
                 }
-                if ($tokens[$i]['type'] !== 'T_COMMA') {
+                if ($tokens[$i]['code'] !== T_COMMA) {
                     return;
                 }
                 $caller = $this->getSelfFqn($phpcsFile);
 
                 break;
             }
-            if ($type === 'T_SELF'
-                && $tokens[$i + 1]['type'] === 'T_DOUBLE_COLON'
+            if ($code === T_SELF
+                && $tokens[$i + 1]['code'] === T_DOUBLE_COLON
                 && $tokens[$i + 2]['content'] === 'class'
             ) {
                 // self::class
@@ -64,8 +64,17 @@ final class MagicCallSniff implements Sniff
 
                 break;
             }
-            if ($type === 'T_STRING'
-                && $tokens[$i + 1]['type'] === 'T_DOUBLE_COLON'
+            if (($code === T_NAME_FULLY_QUALIFIED || $code === T_NAME_QUALIFIED || $code === T_NAME_RELATIVE)
+                && $tokens[$i + 1]['code'] === T_DOUBLE_COLON
+                && $tokens[$i + 2]['content'] === 'class'
+            ) {
+                // Fully Qualified Classname
+                $caller = ltrim($tokens[$i]['content'], '\\');
+
+                break;
+            }
+            if ($code === T_STRING
+                && $tokens[$i + 1]['code'] === T_DOUBLE_COLON
                 && $tokens[$i + 2]['content'] === 'class'
             ) {
                 $className = $tokens[$i]['content'];
@@ -77,15 +86,9 @@ final class MagicCallSniff implements Sniff
 
                 break;
             }
-            if ($type === 'T_CONSTANT_ENCAPSED_STRING') {
+            if ($code === T_CONSTANT_ENCAPSED_STRING) {
                 // Classname in string
                 $caller = $tokens[$i]['content'];
-
-                break;
-            }
-            if ($type === 'T_NS_SEPARATOR') {
-                // Fully Qualified Classname
-                $caller = $this->getFqn($phpcsFile, $stackPtr);
 
                 break;
             }
@@ -122,18 +125,15 @@ final class MagicCallSniff implements Sniff
      */
     private function getFqn(File $file, int $position): string
     {
-        $fqn      = '';
-        $types    = ['T_STRING', 'T_NS_SEPARATOR'];
-        $tokens   = $file->getTokens();
-        $position = $file->findNext(T_STRING, --$position) ?: 0;
-        $type     = 0;
-        while ($tokens[$position]['type'] === $types[$type]) {
-            $fqn .= $tokens[$position]['content'];
-            $position++;
-            $type ^= 1;
+        $tokens     = $file->getTokens();
+        $nameTokens = [T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED, T_NAME_RELATIVE];
+        $namePos    = $file->findNext($nameTokens, $position + 1);
+
+        if ($namePos !== FALSE && isset($tokens[$namePos])) {
+            return ltrim($tokens[$namePos]['content'], '\\');
         }
 
-        return $fqn;
+        return '';
     }
 
     /**

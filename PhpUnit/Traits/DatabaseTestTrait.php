@@ -130,7 +130,7 @@ trait DatabaseTestTrait
         $this->restoreExceptionHandler();
     }
 
-    /**
+    /*
      * --------------------------------------- HELPERS ----------------------------------------------
      */
 
