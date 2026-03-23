@@ -36,9 +36,10 @@ final class ConstructorSniff extends SniffAbstract
      */
     public function process(File $phpcsFile, $stackPtr): void
     {
-        $tokens = $phpcsFile->getTokens();
+        $tokens       = $phpcsFile->getTokens();
+        $namePosition = $phpcsFile->findNext(T_STRING, $stackPtr);
 
-        if ($tokens[$phpcsFile->findNext(T_STRING, $stackPtr)][self::CONTENT] === '__construct') {
+        if (is_int($namePosition) && $tokens[$namePosition][self::CONTENT] === '__construct') {
             $innerPosition = $phpcsFile->findPrevious(T_ANON_CLASS, $stackPtr);
 
             if (is_int($innerPosition)) {
