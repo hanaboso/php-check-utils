@@ -95,7 +95,7 @@ final class MagicCallSniff implements Sniff
         }
 
         $methodPos = $phpcsFile->findPrevious(T_CONSTANT_ENCAPSED_STRING, $end);
-        if ($methodPos <= $i) {
+        if (!is_int($methodPos) || $methodPos <= $i) {
             return;
         }
 
