@@ -14,7 +14,7 @@ composer require --dev hanaboso/php-check-utils
 
 CodeSniffer
 -----------
-* PHP_CodeSniffer docs: https://github.com/squizlabs/PHP_CodeSniffer
+* PHP_CodeSniffer docs: https://github.com/PHPCSStandards/PHP_CodeSniffer
 * Slevomat Coding Standard docs: https://github.com/slevomat/coding-standard/
 * run PHP_CodeSniffer
 ```bash
@@ -38,7 +38,7 @@ CodeSniffer
 
 CodeFixer
 ---------
-* PHP_CodeSniffer docs: https://github.com/squizlabs/PHP_CodeSniffer
+* PHP_CodeSniffer docs: https://github.com/PHPCSStandards/PHP_CodeSniffer
 * run PHP_CodeSnifferFixer
 ```bash
 ./vendor/bin/phpcbf --standard=./ruleset.xml -p src/ tests/
