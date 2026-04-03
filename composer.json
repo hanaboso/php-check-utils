@@ -1,6 +1,7 @@
 {
     "name": "hanaboso/php-check-utils",
     "description": "Utils for php development - CodeSniffer, PhpStan, PhpUnit, PhpStorm",
+    "type": "phpcodesniffer-standard",
     "license": "MIT",
     "version": "2.0.1",
     "authors": [
