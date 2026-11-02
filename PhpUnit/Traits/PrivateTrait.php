@@ -26,7 +26,6 @@ trait PrivateTrait
         do {
             if ($reflection->hasProperty($propertyName)) {
                 $property = $reflection->getProperty($propertyName);
-                $property->setAccessible(TRUE);
                 $property->setValue($object, $value);
 
                 return;
@@ -51,7 +50,6 @@ trait PrivateTrait
         do {
             if ($reflection->hasProperty($propertyName)) {
                 $property = $reflection->getProperty($propertyName);
-                $property->setAccessible(TRUE);
 
                 return $property->getValue($object);
             }
@@ -78,7 +76,6 @@ trait PrivateTrait
         $properties = $reflection->getProperties();
 
         foreach ($properties as $property) {
-            $property->setAccessible(TRUE);
             $obj = $property->getValue($object);
             if ($obj instanceof $instance) {
                 return [$property->getName(), $property->getValue($object)];
@@ -103,7 +100,6 @@ trait PrivateTrait
         do {
             if ($reflection->hasMethod($methodName)) {
                 $method = $reflection->getMethod($methodName);
-                $method->setAccessible(TRUE);
 
                 return $method->invokeArgs($object, $parameters);
             }

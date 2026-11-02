@@ -56,6 +56,7 @@ parameters:
 			- Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
 			- Symfony\Contracts\EventDispatcher\Event
 		classesNotRequiredToBeAbstractOrFinal: []
+		ignoreDoctrineEntities: true
 		interfacesImplementedByContainers: []
 		methodsAllowedToUseContainerTypeDeclarations: []
 
@@ -89,6 +90,7 @@ parametersSchema:
 		allowAbstractClasses: bool()
 		classesAllowedToBeExtended: listOf(string())
 		classesNotRequiredToBeAbstractOrFinal: listOf(string())
+		ignoreDoctrineEntities: bool()
 		interfacesImplementedByContainers: listOf(string())
 		methodsAllowedToUseContainerTypeDeclarations: listOf(string())
 	])
@@ -114,6 +116,7 @@ services:
 		arguments:
 			allowAbstractClasses: %ergebnis.allowAbstractClasses%
 			classesNotRequiredToBeAbstractOrFinal: %ergebnis.classesNotRequiredToBeAbstractOrFinal%
+			ignoreDoctrineEntities: %ergebnis.ignoreDoctrineEntities%
 		tags:
 			- phpstan.rules.rule
 
