@@ -55,6 +55,7 @@ parameters:
 			- Symfony\Bundle\FrameworkBundle\Test\WebTestCase
 		classesNotRequiredToBeAbstractOrFinal:
 			- Hanaboso\PhpCheckUtils\TwigCs\TwigRuleset
+		ignoreDoctrineEntities: true
 		interfacesImplementedByContainers: []
 		methodsAllowedToUseContainerTypeDeclarations: []
 
@@ -88,6 +89,7 @@ parametersSchema:
 		allowAbstractClasses: bool()
 		classesAllowedToBeExtended: listOf(string())
 		classesNotRequiredToBeAbstractOrFinal: listOf(string())
+		ignoreDoctrineEntities: bool()
 		interfacesImplementedByContainers: listOf(string())
 		methodsAllowedToUseContainerTypeDeclarations: listOf(string())
 	])
@@ -113,6 +115,7 @@ services:
 		arguments:
 			allowAbstractClasses: %ergebnis.allowAbstractClasses%
 			classesNotRequiredToBeAbstractOrFinal: %ergebnis.classesNotRequiredToBeAbstractOrFinal%
+			ignoreDoctrineEntities: %ergebnis.ignoreDoctrineEntities%
 		tags:
 			- phpstan.rules.rule
 
